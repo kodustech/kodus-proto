@@ -8,8 +8,6 @@
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
 
-export const protobufPackage = "kodus.ast.v1";
-
 export enum PlatformType {
   PLATFORM_TYPE_UNSPECIFIED = 0,
   PLATFORM_TYPE_GITHUB = 1,
@@ -64,8 +62,6 @@ export interface DeleteRepositoryRequest {
   repositoryName: string;
   branchName: string;
 }
-
-export const KODUS_AST_V1_PACKAGE_NAME = "kodus.ast.v1";
 
 export interface ASTAnalyzerServiceClient {
   buildEnrichedGraph(request: BuildEnrichedGraphRequest): Observable<BuildEnrichedGraphResponse>;

@@ -2,12 +2,19 @@
   "name": "kodus-proto",
   "version": "1.0.0",
   "license": "AGPL-3.0-only",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "dependencies": {
     "@bufbuild/buf": "^1.52.1",
     "ts-proto": "^2.7.0"
   },
+  "peerDependencies": {
+    "@nestjs/microservices": "^11.0.19",
+    "rxjs": "^7.8.2"
+  },
   "scripts": {
-    "prepack": "yarn generate",
+    "prepack": "yarn tsc && yarn generate",
+    "types": "tsc",
     "generate": "buf generate",
     "lint": "buf lint",
     "docker:generate": "docker compose -f docker-compose.yml up"
@@ -15,5 +22,10 @@
   "files": [
     "gen/NestJs/**/*",
     "kodus/**/*"
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
+  }
 }

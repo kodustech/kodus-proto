@@ -6,8 +6,6 @@
 
 /* eslint-disable */
 
-export const protobufPackage = "kodus.common.v1";
-
 export interface GrpcError {
   message: string;
   code: number;
@@ -18,5 +16,3 @@ export interface GrpcResponse {
   success: boolean;
   errors: GrpcError[];
 }
-
-export const KODUS_COMMON_V1_PACKAGE_NAME = "kodus.common.v1";

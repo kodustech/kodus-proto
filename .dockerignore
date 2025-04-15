@@ -4,3 +4,4 @@ DockerFiles/
 .vscode/
 .gitignore/
 docker-compose.yml
+dist/
