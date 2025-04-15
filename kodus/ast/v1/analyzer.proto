@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package kodus.ast.v1;
+
+service ASTAnalyzerService {
+  rpc BuildEnrichedGraph(BuildEnrichedGraphRequest) returns (stream BuildEnrichedGraphResponse);
+}
+
+message BuildEnrichedGraphRequest {
+  CloneRepositoryRequest base_repo = 1;
+  CloneRepositoryRequest head_repo = 2;
+}
+
+message BuildEnrichedGraphResponse {
+  string chunk = 1;
+}
+
+enum PlatformType {
+  PLATFORM_TYPE_UNSPECIFIED = 0;
+  PLATFORM_TYPE_GITHUB = 1;
+  PLATFORM_TYPE_GITLAB = 2;
+  PLATFORM_TYPE_JIRA = 3;
+  PLATFORM_TYPE_SLACK = 4;
+  PLATFORM_TYPE_NOTION = 5;
+  PLATFORM_TYPE_MSTEAMS = 6;
+  PLATFORM_TYPE_DISCORD = 7;
+  PLATFORM_TYPE_AZURE_BOARDS = 8;
+  PLATFORM_TYPE_AZURE_REPOS = 9;
+  PLATFORM_TYPE_KODUS_WEB = 10;
+  PLATFORM_TYPE_BITBUCKET = 11;
+}
+
+enum AuthMode {
+  AUTH_MODE_UNSPECIFIED = 0;
+  AUTH_MODE_OAUTH = 1;
+  AUTH_MODE_TOKEN = 2;
+}
+
+message Auth {
+  optional AuthMode type = 1;
+  optional string token = 2;
+  optional string org = 3;
+}
+
+message CloneRepositoryRequest {
+  string url = 1;
+  PlatformType provider = 2;
+  optional string branch = 3;
+  optional Auth auth = 4;
+  string organization_id = 5;
+  string repository_id = 6;
+  string repository_name = 7;
+}
+
+message DeleteRepositoryRequest {
+  string organization_id = 1;
+  string repository_id = 2;
+  string repository_name = 3;
+  string branch_name = 4;
+}

@@ -1,0 +1,14 @@
+{
+  "name": "kodus-proto",
+  "version": "1.0.0",
+  "license": "AGPL-3.0-only",
+  "dependencies": {
+    "@bufbuild/buf": "^1.52.1",
+    "ts-proto": "^2.7.0"
+  },
+  "scripts": {
+    "generate": "buf generate",
+    "lint": "buf lint",
+    "docker:generate": "docker compose -f docker-compose.yml up"
+  }
+}
