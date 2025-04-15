@@ -8,26 +8,26 @@
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
 
-export enum PlatformType {
-  PLATFORM_TYPE_UNSPECIFIED = 0,
-  PLATFORM_TYPE_GITHUB = 1,
-  PLATFORM_TYPE_GITLAB = 2,
-  PLATFORM_TYPE_JIRA = 3,
-  PLATFORM_TYPE_SLACK = 4,
-  PLATFORM_TYPE_NOTION = 5,
-  PLATFORM_TYPE_MSTEAMS = 6,
-  PLATFORM_TYPE_DISCORD = 7,
-  PLATFORM_TYPE_AZURE_BOARDS = 8,
-  PLATFORM_TYPE_AZURE_REPOS = 9,
-  PLATFORM_TYPE_KODUS_WEB = 10,
-  PLATFORM_TYPE_BITBUCKET = 11,
+export enum ProtoPlatformType {
+  PROTO_PLATFORM_TYPE_UNSPECIFIED = 0,
+  PROTO_PLATFORM_TYPE_GITHUB = 1,
+  PROTO_PLATFORM_TYPE_GITLAB = 2,
+  PROTO_PLATFORM_TYPE_JIRA = 3,
+  PROTO_PLATFORM_TYPE_SLACK = 4,
+  PROTO_PLATFORM_TYPE_NOTION = 5,
+  PROTO_PLATFORM_TYPE_MSTEAMS = 6,
+  PROTO_PLATFORM_TYPE_DISCORD = 7,
+  PROTO_PLATFORM_TYPE_AZURE_BOARDS = 8,
+  PROTO_PLATFORM_TYPE_AZURE_REPOS = 9,
+  PROTO_PLATFORM_TYPE_KODUS_WEB = 10,
+  PROTO_PLATFORM_TYPE_BITBUCKET = 11,
   UNRECOGNIZED = -1,
 }
 
-export enum AuthMode {
-  AUTH_MODE_UNSPECIFIED = 0,
-  AUTH_MODE_OAUTH = 1,
-  AUTH_MODE_TOKEN = 2,
+export enum ProtoAuthMode {
+  PROTO_AUTH_MODE_UNSPECIFIED = 0,
+  PROTO_AUTH_MODE_OAUTH = 1,
+  PROTO_AUTH_MODE_TOKEN = 2,
   UNRECOGNIZED = -1,
 }
 
@@ -41,14 +41,14 @@ export interface BuildEnrichedGraphResponse {
 }
 
 export interface Auth {
-  type?: AuthMode | undefined;
+  type?: ProtoAuthMode | undefined;
   token?: string | undefined;
   org?: string | undefined;
 }
 
 export interface CloneRepositoryRequest {
   url: string;
-  provider: PlatformType;
+  provider: ProtoPlatformType;
   branch?: string | undefined;
   auth?: Auth | undefined;
   organizationId: string;

@@ -1,31 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AST_ANALYZER_SERVICE_NAME = exports.AuthMode = exports.PlatformType = void 0;
+exports.AST_ANALYZER_SERVICE_NAME = exports.ProtoAuthMode = exports.ProtoPlatformType = void 0;
 exports.ASTAnalyzerServiceControllerMethods = ASTAnalyzerServiceControllerMethods;
 const microservices_1 = require("@nestjs/microservices");
-var PlatformType;
-(function (PlatformType) {
-    PlatformType[PlatformType["PLATFORM_TYPE_UNSPECIFIED"] = 0] = "PLATFORM_TYPE_UNSPECIFIED";
-    PlatformType[PlatformType["PLATFORM_TYPE_GITHUB"] = 1] = "PLATFORM_TYPE_GITHUB";
-    PlatformType[PlatformType["PLATFORM_TYPE_GITLAB"] = 2] = "PLATFORM_TYPE_GITLAB";
-    PlatformType[PlatformType["PLATFORM_TYPE_JIRA"] = 3] = "PLATFORM_TYPE_JIRA";
-    PlatformType[PlatformType["PLATFORM_TYPE_SLACK"] = 4] = "PLATFORM_TYPE_SLACK";
-    PlatformType[PlatformType["PLATFORM_TYPE_NOTION"] = 5] = "PLATFORM_TYPE_NOTION";
-    PlatformType[PlatformType["PLATFORM_TYPE_MSTEAMS"] = 6] = "PLATFORM_TYPE_MSTEAMS";
-    PlatformType[PlatformType["PLATFORM_TYPE_DISCORD"] = 7] = "PLATFORM_TYPE_DISCORD";
-    PlatformType[PlatformType["PLATFORM_TYPE_AZURE_BOARDS"] = 8] = "PLATFORM_TYPE_AZURE_BOARDS";
-    PlatformType[PlatformType["PLATFORM_TYPE_AZURE_REPOS"] = 9] = "PLATFORM_TYPE_AZURE_REPOS";
-    PlatformType[PlatformType["PLATFORM_TYPE_KODUS_WEB"] = 10] = "PLATFORM_TYPE_KODUS_WEB";
-    PlatformType[PlatformType["PLATFORM_TYPE_BITBUCKET"] = 11] = "PLATFORM_TYPE_BITBUCKET";
-    PlatformType[PlatformType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
-})(PlatformType || (exports.PlatformType = PlatformType = {}));
-var AuthMode;
-(function (AuthMode) {
-    AuthMode[AuthMode["AUTH_MODE_UNSPECIFIED"] = 0] = "AUTH_MODE_UNSPECIFIED";
-    AuthMode[AuthMode["AUTH_MODE_OAUTH"] = 1] = "AUTH_MODE_OAUTH";
-    AuthMode[AuthMode["AUTH_MODE_TOKEN"] = 2] = "AUTH_MODE_TOKEN";
-    AuthMode[AuthMode["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
-})(AuthMode || (exports.AuthMode = AuthMode = {}));
+var ProtoPlatformType;
+(function (ProtoPlatformType) {
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_UNSPECIFIED"] = 0] = "PROTO_PLATFORM_TYPE_UNSPECIFIED";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_GITHUB"] = 1] = "PROTO_PLATFORM_TYPE_GITHUB";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_GITLAB"] = 2] = "PROTO_PLATFORM_TYPE_GITLAB";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_JIRA"] = 3] = "PROTO_PLATFORM_TYPE_JIRA";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_SLACK"] = 4] = "PROTO_PLATFORM_TYPE_SLACK";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_NOTION"] = 5] = "PROTO_PLATFORM_TYPE_NOTION";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_MSTEAMS"] = 6] = "PROTO_PLATFORM_TYPE_MSTEAMS";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_DISCORD"] = 7] = "PROTO_PLATFORM_TYPE_DISCORD";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_AZURE_BOARDS"] = 8] = "PROTO_PLATFORM_TYPE_AZURE_BOARDS";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_AZURE_REPOS"] = 9] = "PROTO_PLATFORM_TYPE_AZURE_REPOS";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_KODUS_WEB"] = 10] = "PROTO_PLATFORM_TYPE_KODUS_WEB";
+    ProtoPlatformType[ProtoPlatformType["PROTO_PLATFORM_TYPE_BITBUCKET"] = 11] = "PROTO_PLATFORM_TYPE_BITBUCKET";
+    ProtoPlatformType[ProtoPlatformType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(ProtoPlatformType || (exports.ProtoPlatformType = ProtoPlatformType = {}));
+var ProtoAuthMode;
+(function (ProtoAuthMode) {
+    ProtoAuthMode[ProtoAuthMode["PROTO_AUTH_MODE_UNSPECIFIED"] = 0] = "PROTO_AUTH_MODE_UNSPECIFIED";
+    ProtoAuthMode[ProtoAuthMode["PROTO_AUTH_MODE_OAUTH"] = 1] = "PROTO_AUTH_MODE_OAUTH";
+    ProtoAuthMode[ProtoAuthMode["PROTO_AUTH_MODE_TOKEN"] = 2] = "PROTO_AUTH_MODE_TOKEN";
+    ProtoAuthMode[ProtoAuthMode["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(ProtoAuthMode || (exports.ProtoAuthMode = ProtoAuthMode = {}));
 function ASTAnalyzerServiceControllerMethods() {
     return function (constructor) {
         const grpcMethods = ["buildEnrichedGraph"];
