@@ -7,6 +7,7 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
+import { GrpcError } from "../../common/v1/error";
 
 export enum ProtoPlatformType {
   PROTO_PLATFORM_TYPE_UNSPECIFIED = 0,
@@ -37,7 +38,9 @@ export interface BuildEnrichedGraphRequest {
 }
 
 export interface BuildEnrichedGraphResponse {
-  chunk: string;
+  data: string;
+  success: boolean;
+  errors: GrpcError[];
 }
 
 export interface Auth {

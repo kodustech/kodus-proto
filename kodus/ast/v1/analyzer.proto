@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package kodus.ast.v1;
 
+import "kodus/common/v1/error.proto";
+
 service ASTAnalyzerService {
   rpc BuildEnrichedGraph(BuildEnrichedGraphRequest) returns (stream BuildEnrichedGraphResponse);
 }
@@ -12,7 +14,9 @@ message BuildEnrichedGraphRequest {
 }
 
 message BuildEnrichedGraphResponse {
-  string chunk = 1;
+  string data = 1;
+  bool success = 2;
+  repeated kodus.common.v1.GrpcError errors = 3;
 }
 
 enum ProtoPlatformType {

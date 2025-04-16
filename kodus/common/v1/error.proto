@@ -6,9 +6,3 @@ message GrpcError {
   string message = 1;
   int32 code = 2;
 }
-
-message GrpcResponse {
-  string message = 1;
-  bool success = 2;
-  repeated GrpcError errors = 3;
-}

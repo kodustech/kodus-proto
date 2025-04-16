@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+import { GrpcError } from "../../common/v1/error";
 export declare enum ProtoPlatformType {
     PROTO_PLATFORM_TYPE_UNSPECIFIED = 0,
     PROTO_PLATFORM_TYPE_GITHUB = 1,
@@ -25,7 +26,9 @@ export interface BuildEnrichedGraphRequest {
     headRepo: CloneRepositoryRequest | undefined;
 }
 export interface BuildEnrichedGraphResponse {
-    chunk: string;
+    data: string;
+    success: boolean;
+    errors: GrpcError[];
 }
 export interface Auth {
     type?: ProtoAuthMode | undefined;

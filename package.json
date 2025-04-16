@@ -2,28 +2,30 @@
   "name": "kodus-proto",
   "version": "1.0.0",
   "license": "AGPL-3.0-only",
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
   "dependencies": {},
   "peerDependencies": {
     "@nestjs/microservices": "^11.0.12",
     "rxjs": "^7.8.2"
   },
   "scripts": {
-    "prepack": "yarn generate && yarn tsc",
-    "types": "tsc",
+    "prepack": "rm -rf dist gen && yarn generate && yarn generate-barrels && yarn types",
+    "generate-barrels": "barrelsby --delete -c barrelsby.json -V",
+    "types": "tsc --noResolve --noCheck",
     "generate": "buf generate",
     "lint": "buf lint",
     "docker:generate": "docker compose -f docker-compose.yml up"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "^1.52.1",
+    "barrelsby": "^2.8.1",
+    "ts-proto": "^2.7.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
   },
   "files": [
     "dist/**/*",
     "kodus/**/*"
   ],
-  "devDependencies": {
-    "@bufbuild/buf": "^1.52.1",
-    "ts-proto": "^2.7.0",
-    "tslib": "^2.8.1",
-    "typescript": "^5.8.3"
-  }
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts"
 }

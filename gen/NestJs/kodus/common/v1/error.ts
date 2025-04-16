@@ -2,17 +2,11 @@
 // versions:
 //   protoc-gen-ts_proto  v2.7.0
 //   protoc               unknown
-// source: kodus/common/v1/response.proto
+// source: kodus/common/v1/error.proto
 
 /* eslint-disable */
 
 export interface GrpcError {
   message: string;
   code: number;
-}
-
-export interface GrpcResponse {
-  message: string;
-  success: boolean;
-  errors: GrpcError[];
 }

@@ -26,6 +26,6 @@
   "watchOptions": {
       "watchFile": "useFsEventsOnParentDirectory"
   },
-  "include": ["main.ts","gen/NestJs/**/*"],
+  "include": ["main.ts", "gen/NestJs/**/*"],
   "exclude": ["node_modules", "dist"]
 }
