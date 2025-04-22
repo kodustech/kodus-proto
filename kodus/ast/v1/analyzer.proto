@@ -2,21 +2,19 @@ syntax = "proto3";
 
 package kodus.ast.v1;
 
-import "kodus/common/v1/error.proto";
-
 service ASTAnalyzerService {
   rpc BuildEnrichedGraph(BuildEnrichedGraphRequest) returns (stream BuildEnrichedGraphResponse);
 }
 
 message BuildEnrichedGraphRequest {
-  CloneRepositoryRequest base_repo = 1;
-  CloneRepositoryRequest head_repo = 2;
+  RepositoryData base_repo = 1;
+  RepositoryData head_repo = 2;
 }
 
 message BuildEnrichedGraphResponse {
   string data = 1;
-  bool success = 2;
-  repeated kodus.common.v1.GrpcError errors = 3;
+  int32 code = 2;
+  optional string error = 3;
 }
 
 enum ProtoPlatformType {
@@ -46,7 +44,7 @@ message Auth {
   optional string org = 3;
 }
 
-message CloneRepositoryRequest {
+message RepositoryData {
   string url = 1;
   ProtoPlatformType provider = 2;
   optional string branch = 3;
@@ -54,11 +52,4 @@ message CloneRepositoryRequest {
   string organization_id = 5;
   string repository_id = 6;
   string repository_name = 7;
-}
-
-message DeleteRepositoryRequest {
-  string organization_id = 1;
-  string repository_id = 2;
-  string repository_name = 3;
-  string branch_name = 4;
 }

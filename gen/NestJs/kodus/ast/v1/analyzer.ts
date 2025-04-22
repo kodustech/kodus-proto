@@ -7,7 +7,6 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
-import { GrpcError } from "../../common/v1/error";
 
 export enum ProtoPlatformType {
   PROTO_PLATFORM_TYPE_UNSPECIFIED = 0,
@@ -33,14 +32,14 @@ export enum ProtoAuthMode {
 }
 
 export interface BuildEnrichedGraphRequest {
-  baseRepo: CloneRepositoryRequest | undefined;
-  headRepo: CloneRepositoryRequest | undefined;
+  baseRepo: RepositoryData | undefined;
+  headRepo: RepositoryData | undefined;
 }
 
 export interface BuildEnrichedGraphResponse {
   data: string;
-  success: boolean;
-  errors: GrpcError[];
+  code: number;
+  error?: string | undefined;
 }
 
 export interface Auth {
@@ -49,7 +48,7 @@ export interface Auth {
   org?: string | undefined;
 }
 
-export interface CloneRepositoryRequest {
+export interface RepositoryData {
   url: string;
   provider: ProtoPlatformType;
   branch?: string | undefined;
@@ -57,13 +56,6 @@ export interface CloneRepositoryRequest {
   organizationId: string;
   repositoryId: string;
   repositoryName: string;
-}
-
-export interface DeleteRepositoryRequest {
-  organizationId: string;
-  repositoryId: string;
-  repositoryName: string;
-  branchName: string;
 }
 
 export interface ASTAnalyzerServiceClient {

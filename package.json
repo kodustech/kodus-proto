@@ -10,7 +10,7 @@
   "scripts": {
     "prepack": "rm -rf dist gen && yarn generate && yarn generate-barrels && yarn types",
     "docker:prepack": "rm -rf dist gen && yarn docker:generate && yarn generate-barrels && yarn types",
-    "generate-barrels": "barrelsby --delete -c barrelsby.json -V",
+    "generate-barrels": "barrelsby --delete -c barrelsby.json",
     "types": "tsc --noResolve --noCheck",
     "generate": "buf generate",
     "lint": "buf lint",
