@@ -1,7 +1,7 @@
 {
   "name": "@kodus/kodus-proto",
   "author": "Kodus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "AGPL-3.0-only",
   "peerDependencies": {
     "@nestjs/microservices": "^11.0.12",
