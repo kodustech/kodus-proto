@@ -13,6 +13,7 @@
     "rxjs": "^7.8.2"
   },
   "scripts": {
+    "publish": "yarn prepack && yarn publish --access public",
     "prepack": "rm -rf dist gen && yarn generate && yarn generate-barrels && yarn types",
     "docker:prepack": "rm -rf dist gen && yarn docker:generate && yarn generate-barrels && yarn types",
     "generate-barrels": "barrelsby --delete -c barrelsby.json",
