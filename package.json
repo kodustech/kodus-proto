@@ -1,8 +1,8 @@
 {
-  "name": "kodus-proto",
+  "name": "@kodus/kodus-proto",
+  "author": "Kodus",
   "version": "1.0.0",
   "license": "AGPL-3.0-only",
-  "dependencies": {},
   "peerDependencies": {
     "@nestjs/microservices": "^11.0.12",
     "rxjs": "^7.8.2"
@@ -28,5 +28,14 @@
     "kodus/**/*"
   ],
   "main": "dist/main.js",
-  "types": "dist/main.d.ts"
+  "types": "dist/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.js",
+      "types": "./dist/main.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "description": ""
 }
