@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package kodus.ast.v2;
+
+service ASTAnalyzerService {
+  rpc InitializeRepository(InitializeRepositoryRequest) returns (InitializeRepositoryResponse);
+  rpc DeleteRepository(DeleteRepositoryRequest) returns (DeleteRepositoryResponse);
+
+  rpc GetGraphs(GetGraphsRequest) returns (stream GetGraphsResponse);
+  rpc GetDiff(GetDiffRequest) returns (stream GetDiffResponse);
+}
+
+message InitializeRepositoryRequest {
+  RepositoryData base_repo = 1;
+  RepositoryData head_repo = 2;
+}
+
+message InitializeRepositoryResponse {}
+
+message DeleteRepositoryRequest {
+  RepositoryData base_repo = 1;
+  RepositoryData head_repo = 2;
+}
+
+message DeleteRepositoryResponse {}
+
+message GetGraphsRequest {
+  RepositoryData base_repo = 1;
+  RepositoryData head_repo = 2;
+}
+
+message GetGraphsResponse {
+  string data = 1;
+}
+
+message GetDiffRequest {
+  RepositoryData base_repo = 1;
+  RepositoryData head_repo = 2;
+}
+
+message GetDiffResponse {
+  string data = 1;
+}
+
+enum ProtoPlatformType {
+  PROTO_PLATFORM_TYPE_UNSPECIFIED = 0;
+  PROTO_PLATFORM_TYPE_GITHUB = 1;
+  PROTO_PLATFORM_TYPE_GITLAB = 2;
+  PROTO_PLATFORM_TYPE_JIRA = 3;
+  PROTO_PLATFORM_TYPE_SLACK = 4;
+  PROTO_PLATFORM_TYPE_NOTION = 5;
+  PROTO_PLATFORM_TYPE_MSTEAMS = 6;
+  PROTO_PLATFORM_TYPE_DISCORD = 7;
+  PROTO_PLATFORM_TYPE_AZURE_BOARDS = 8;
+  PROTO_PLATFORM_TYPE_AZURE_REPOS = 9;
+  PROTO_PLATFORM_TYPE_KODUS_WEB = 10;
+  PROTO_PLATFORM_TYPE_BITBUCKET = 11;
+}
+
+enum ProtoAuthMode {
+  PROTO_AUTH_MODE_UNSPECIFIED = 0;
+  PROTO_AUTH_MODE_OAUTH = 1;
+  PROTO_AUTH_MODE_TOKEN = 2;
+}
+
+message Auth {
+  optional ProtoAuthMode type = 1;
+  optional string token = 2;
+  optional string org = 3;
+}
+
+message RepositoryData {
+  string url = 1;
+  ProtoPlatformType provider = 2;
+  optional string branch = 3;
+  optional Auth auth = 4;
+  string organization_id = 5;
+  string repository_id = 6;
+  string repository_name = 7;
+}

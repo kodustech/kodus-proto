@@ -1,6 +1,5 @@
 {
-    "exclude": [
-        "dist"
-    ],
-    "name": "main"
+    "directory": ["gen/NestJs/kodus/ast"],
+    "exclude": ["dist"],
+    "location": "below"
 }
