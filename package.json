@@ -2,7 +2,7 @@
     "name": "@kodus/kodus-proto",
     "author": "Kodus",
     "description": "Protobuf definitions for Kodus services",
-    "type": "module",
+    "type": "commonjs",
     "repository": {
         "type": "git",
         "url": "https://github.com/kodustech/kodus-proto"
@@ -48,6 +48,16 @@
             "types": "./dist/v2/index.d.ts"
         },
         "./package.json": "./package.json"
+    },
+    "typesVersions": {
+        "*": {
+            "v1": [
+                "./dist/v1"
+            ],
+            "v2": [
+                "./dist/v2"
+            ]
+        }
     },
     "dependencies": {}
 }
