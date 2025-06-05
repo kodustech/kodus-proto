@@ -7,6 +7,8 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
+import { EnrichGraph } from "./enriched";
+import { CodeGraph } from "./graph";
 import { RepositoryData } from "./repo";
 
 export interface InitializeRepositoryRequest {
@@ -33,6 +35,12 @@ export interface GetGraphsRequest {
 export interface GetGraphsResponse {
   data: Uint8Array;
   isLast: boolean;
+}
+
+export interface GetGraphsResponseData {
+  baseGraph: CodeGraph | undefined;
+  headGraph: CodeGraph | undefined;
+  enrichHeadGraph: EnrichGraph | undefined;
 }
 
 export interface GetDiffRequest {
