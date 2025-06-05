@@ -16,12 +16,12 @@
     "scripts": {
         "publish": "yarn prepack && yarn publish --access public",
         "prepack": "rm -rf dist gen && yarn generate && yarn generate-barrels && yarn types",
-        "docker:prepack": "rm -rf dist gen && yarn docker:generate && yarn generate-barrels && yarn types",
+        "docker:prepack": "docker compose -f docker-compose.yml up --abort-on-container-exit",
+        "docker:build": "docker compose -f docker-compose.yml build",
         "generate-barrels": "barrelsby --delete -c barrelsby.json",
         "types": "tsc --noResolve --noCheck",
         "generate": "buf generate",
-        "lint": "buf lint",
-        "docker:generate": "docker compose -f docker-compose.yml up"
+        "lint": "buf lint"
     },
     "devDependencies": {
         "@bufbuild/buf": "^1.52.1",
@@ -34,8 +34,6 @@
         "dist/**/*",
         "kodus/**/*"
     ],
-    "main": "dist/main.js",
-    "types": "dist/main.d.ts",
     "exports": {
         "./v1": {
             "import": "./dist/v1/index.js",

@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RelationshipType = exports.NodeType = void 0;
+var NodeType;
+(function (NodeType) {
+    NodeType[NodeType["NODE_TYPE_UNSPECIFIED"] = 0] = "NODE_TYPE_UNSPECIFIED";
+    NodeType[NodeType["NODE_TYPE_CLASS"] = 1] = "NODE_TYPE_CLASS";
+    NodeType[NodeType["NODE_TYPE_METHOD"] = 2] = "NODE_TYPE_METHOD";
+    NodeType[NodeType["NODE_TYPE_FUNCTION"] = 3] = "NODE_TYPE_FUNCTION";
+    NodeType[NodeType["NODE_TYPE_INTERFACE"] = 4] = "NODE_TYPE_INTERFACE";
+    NodeType[NodeType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(NodeType || (exports.NodeType = NodeType = {}));
+var RelationshipType;
+(function (RelationshipType) {
+    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_UNSPECIFIED"] = 0] = "RELATIONSHIP_TYPE_UNSPECIFIED";
+    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_CALLS"] = 1] = "RELATIONSHIP_TYPE_CALLS";
+    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION"] = 2] = "RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION";
+    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_HAS_METHOD"] = 3] = "RELATIONSHIP_TYPE_HAS_METHOD";
+    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_IMPORTS"] = 4] = "RELATIONSHIP_TYPE_IMPORTS";
+    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_IMPLEMENTS"] = 5] = "RELATIONSHIP_TYPE_IMPLEMENTS";
+    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_IMPLEMENTED_BY"] = 6] = "RELATIONSHIP_TYPE_IMPLEMENTED_BY";
+    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_EXTENDS"] = 7] = "RELATIONSHIP_TYPE_EXTENDS";
+    RelationshipType[RelationshipType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(RelationshipType || (exports.RelationshipType = RelationshipType = {}));
+//# sourceMappingURL=enriched.js.map

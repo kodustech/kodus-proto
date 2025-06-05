@@ -1,0 +1,105 @@
+export declare enum ScopeType {
+    SCOPE_TYPE_UNSPECIFIED = 0,
+    SCOPE_TYPE_FILE = 1,
+    SCOPE_TYPE_CLASS = 2,
+    SCOPE_TYPE_INTERFACE = 3,
+    SCOPE_TYPE_ENUM = 4,
+    SCOPE_TYPE_FUNCTION = 5,
+    SCOPE_TYPE_METHOD = 6,
+    UNRECOGNIZED = -1
+}
+export declare enum QueryType {
+    QUERY_TYPE_UNSPECIFIED = 0,
+    QUERY_TYPE_IMPORT = 1,
+    QUERY_TYPE_CLASS = 2,
+    QUERY_TYPE_INTERFACE = 3,
+    QUERY_TYPE_ENUM = 4,
+    QUERY_TYPE_TYPE_ALIAS = 5,
+    QUERY_TYPE_FUNCTION = 6,
+    QUERY_TYPE_FUNCTION_CALL = 7,
+    QUERY_TYPE_FUNCTION_PARAMETERS = 8,
+    UNRECOGNIZED = -1
+}
+export interface Scope {
+    type: ScopeType;
+    name: string;
+}
+export interface Call {
+    nodeId: number;
+    function: string;
+    file: string;
+    caller?: string | undefined;
+}
+export interface FileAnalysis {
+    defines: string[];
+    calls: Call[];
+    imports: string[];
+    className: string[];
+    usedBy?: FileAnalysis_UsedBy | undefined;
+    dependencies?: FileAnalysis_Dependencies | undefined;
+}
+export interface FileAnalysis_UsedBy {
+    files: string[];
+    functions: string[];
+    types: string[];
+}
+export interface FileAnalysis_Dependencies {
+    direct: string[];
+    transitive: string[];
+}
+export interface FunctionAnalysis {
+    nodeId: number;
+    file: string;
+    name: string;
+    params: string[];
+    lines: number;
+    returnType: string;
+    calls: Call[];
+    className?: string | undefined;
+    startLine: number;
+    endLine: number;
+    functionHash: string;
+    signatureHash: string;
+    fullText?: string | undefined;
+}
+export interface TypeAnalysis {
+    nodeId: number;
+    file: string;
+    type: QueryType;
+    name: string;
+    fields: {
+        [key: string]: string;
+    };
+    implements: string[];
+    implementedBy: string[];
+    extends: string[];
+    extendedBy: string[];
+    scope: Scope[];
+}
+export interface TypeAnalysis_FieldsEntry {
+    key: string;
+    value: string;
+}
+export interface CodeGraph {
+    files: {
+        [key: string]: FileAnalysis;
+    };
+    functions: {
+        [key: string]: FunctionAnalysis;
+    };
+    types: {
+        [key: string]: TypeAnalysis;
+    };
+}
+export interface CodeGraph_FilesEntry {
+    key: string;
+    value: FileAnalysis | undefined;
+}
+export interface CodeGraph_FunctionsEntry {
+    key: string;
+    value: FunctionAnalysis | undefined;
+}
+export interface CodeGraph_TypesEntry {
+    key: string;
+    value: TypeAnalysis | undefined;
+}

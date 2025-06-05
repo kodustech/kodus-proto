@@ -1,11 +1,10 @@
 services:
-  kodus-proto:
-    container_name: kodus-proto
-    image: kodus/kodus-proto:latest
-    user: 1000:1000
-    build:
-      context: .
-      dockerfile: DockerFiles/DockerFile
-    volumes:
-      - .:/workspace
-    command: ["generate"]
+    kodus-proto:
+        container_name: kodus-proto
+        image: kodus/kodus-proto:latest
+        user: 1000:1000
+        build:
+            context: .
+            dockerfile: DockerFiles/DockerFile
+        volumes:
+            - .:/workspace

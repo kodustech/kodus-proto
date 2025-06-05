@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package kodus.ast.v2;
+
+// Node types
+enum NodeType {
+  NODE_TYPE_UNSPECIFIED = 0;
+  NODE_TYPE_CLASS = 1;
+  NODE_TYPE_METHOD = 2;
+  NODE_TYPE_FUNCTION = 3;
+  NODE_TYPE_INTERFACE = 4;
+}
+
+// Relationship types
+enum RelationshipType {
+  RELATIONSHIP_TYPE_UNSPECIFIED = 0;
+  RELATIONSHIP_TYPE_CALLS = 1;
+  RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION = 2;
+  RELATIONSHIP_TYPE_HAS_METHOD = 3;
+  RELATIONSHIP_TYPE_IMPORTS = 4;
+  RELATIONSHIP_TYPE_IMPLEMENTS = 5;
+  RELATIONSHIP_TYPE_IMPLEMENTED_BY = 6;
+  RELATIONSHIP_TYPE_EXTENDS = 7;
+}
+
+// Node in the enriched graph
+message EnrichGraphNode {
+  string id = 1;
+  NodeType type = 2;
+  string file = 3;
+  string file_path = 4;
+}
+
+// Edge/relationship in the enriched graph
+message EnrichGraphEdge {
+  string from = 1;
+  string to = 2;
+  RelationshipType type = 3;
+  string from_path = 4;
+  string to_path = 5;
+}
+
+// Impacted node (with optional fields)
+message ImpactedNode {
+  string id = 1;
+  string type = 2;
+  string severity = 3;
+  int32 level = 4;
+  string file_path = 5;
+  repeated string called_by = 6;
+  repeated string imported_by = 7;
+}
+
+// The enriched graph itself
+message EnrichGraph {
+  repeated EnrichGraphNode nodes = 1;
+  repeated EnrichGraphEdge relationships = 2;
+}
