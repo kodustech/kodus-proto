@@ -14,17 +14,7 @@
         "rxjs": "^7.8.2"
     },
     "scripts": {
-        "publish": "yarn prepack && yarn publish --access public --tag latest",
-        "publish:dev": "yarn prepack && yarn publish --access public --tag dev",
-        "publish:next": "yarn prepack && yarn publish --access public --tag next",
-        "publish:alpha": "yarn prepack && yarn publish --access public --tag alpha",
-        "publish:beta": "yarn prepack && yarn publish --access public --tag beta",
         "prepack": "rm -rf dist gen && yarn generate && yarn generate-barrels && yarn types",
-        "docker:publish": "yarn docker:prepack && yarn publish --access public --tag latest",
-        "docker:publish:dev": "yarn docker:prepack && yarn publish --access public --tag dev",
-        "docker:publish:next": "yarn docker:prepack && yarn publish --access public --tag next",
-        "docker:publish:alpha": "yarn docker:prepack && yarn publish --access public --tag alpha",
-        "docker:publish:beta": "yarn docker:prepack && yarn publish --access public --tag beta",
         "docker:prepack": "docker compose -f docker-compose.yml up --abort-on-container-exit",
         "docker:build": "docker compose -f docker-compose.yml build",
         "generate-barrels": "barrelsby --delete -c barrelsby.json",
