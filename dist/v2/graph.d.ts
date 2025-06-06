@@ -22,6 +22,16 @@ export declare enum QueryType {
     QUERY_TYPE_FUNCTION_PARAMETERS = 8,
     UNRECOGNIZED = -1
 }
+export interface Point {
+    row: number;
+    column: number;
+}
+export interface Range {
+    startIndex: number;
+    endIndex: number;
+    startPosition: Point | undefined;
+    endPosition: Point | undefined;
+}
 /** Represents a scope */
 export interface Scope {
     type: ScopeType;
@@ -55,6 +65,7 @@ export interface FileAnalysis_Dependencies {
 /** Represents detailed function analysis */
 export interface FunctionAnalysis {
     nodeId: number;
+    position: Range | undefined;
     file: string;
     name: string;
     params: string[];
@@ -71,6 +82,7 @@ export interface FunctionAnalysis {
 /** Represents detailed type analysis */
 export interface TypeAnalysis {
     nodeId: number;
+    position: Range | undefined;
     file: string;
     type: QueryType;
     name: string;
