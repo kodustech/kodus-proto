@@ -27,11 +27,13 @@ export interface GetGraphsResponseData {
     headGraph: CodeGraph | undefined;
     enrichHeadGraph: EnrichGraph | undefined;
 }
-export interface GetDiffRequest {
-    baseRepo: RepositoryData | undefined;
+export interface GetContentFromDiffRequest {
     headRepo: RepositoryData | undefined;
+    baseRepo: RepositoryData | undefined;
+    diff: string;
+    filePath: string;
 }
-export interface GetDiffResponse {
+export interface GetContentFromDiffResponse {
     data: Uint8Array;
     isLast: boolean;
 }
@@ -43,13 +45,13 @@ export interface ASTAnalyzerServiceClient {
     initializeRepository(request: InitializeRepositoryRequest): Observable<InitializeRepositoryResponse>;
     deleteRepository(request: DeleteRepositoryRequest): Observable<DeleteRepositoryResponse>;
     getGraphs(request: GetGraphsRequest): Observable<GetGraphsResponse>;
-    getDiff(request: GetDiffRequest): Observable<GetDiffResponse>;
+    getContentFromDiff(request: GetContentFromDiffRequest): Observable<GetContentFromDiffResponse>;
 }
 export interface ASTAnalyzerServiceController {
     initializeRepository(request: InitializeRepositoryRequest): Promise<InitializeRepositoryResponse> | Observable<InitializeRepositoryResponse> | InitializeRepositoryResponse;
     deleteRepository(request: DeleteRepositoryRequest): Promise<DeleteRepositoryResponse> | Observable<DeleteRepositoryResponse> | DeleteRepositoryResponse;
     getGraphs(request: GetGraphsRequest): Observable<GetGraphsResponse>;
-    getDiff(request: GetDiffRequest): Observable<GetDiffResponse>;
+    getContentFromDiff(request: GetContentFromDiffRequest): Observable<GetContentFromDiffResponse>;
 }
 export declare function ASTAnalyzerServiceControllerMethods(): (constructor: Function) => void;
 export declare const AST_ANALYZER_SERVICE_NAME = "ASTAnalyzerService";

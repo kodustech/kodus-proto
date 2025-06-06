@@ -6,55 +6,72 @@ import "kodus/ast/v2/enriched.proto";
 import "kodus/ast/v2/graph.proto";
 import "kodus/ast/v2/repo.proto";
 
+// The ASTAnalyzerService provides methods for analyzing code repositories
 service ASTAnalyzerService {
+  // Initializes a repository pair for analysis
   rpc InitializeRepository(InitializeRepositoryRequest) returns (InitializeRepositoryResponse);
+  // Deletes a repository pair from analysis
   rpc DeleteRepository(DeleteRepositoryRequest) returns (DeleteRepositoryResponse);
 
+  // Retrieves graphs for an initialized repository pair
   rpc GetGraphs(GetGraphsRequest) returns (stream GetGraphsResponse);
-  rpc GetDiff(GetDiffRequest) returns (stream GetDiffResponse);
+  // Retrieves relevant file content based on a diff
+  rpc GetContentFromDiff(GetContentFromDiffRequest) returns (stream GetContentFromDiffResponse);
 }
 
+// Request for initializing a repository pair
 message InitializeRepositoryRequest {
-  RepositoryData base_repo = 1;
-  RepositoryData head_repo = 2;
+  RepositoryData base_repo = 1; // The base repository to initialize
+  RepositoryData head_repo = 2; // The head repository to initialize
 }
 
+// Response for initializing a repository pair
 message InitializeRepositoryResponse {}
 
+// Request for deleting a repository pair
 message DeleteRepositoryRequest {
-  RepositoryData base_repo = 1;
-  RepositoryData head_repo = 2;
+  RepositoryData base_repo = 1; // The base repository to delete
+  RepositoryData head_repo = 2; // The head repository to delete
 }
 
+// Response for deleting a repository pair
 message DeleteRepositoryResponse {}
 
+// Request for getting graphs for a repository pair
 message GetGraphsRequest {
   RepositoryData base_repo = 1;
   RepositoryData head_repo = 2;
 }
 
+// Response for getting graphs for a repository pair
 message GetGraphsResponse {
-  bytes data = 1;
-  bool is_last = 2;
+  bytes data = 1; // Serialized graph data
+  bool is_last = 2; // Indicates if this is the last chunk of data
 }
 
+// Deserialized response data for GetGraphs
 message GetGraphsResponseData {
-  CodeGraph base_graph = 1;
-  CodeGraph head_graph = 2;
-  EnrichGraph enrich_head_graph = 3;
+  CodeGraph base_graph = 1; // Graph for the base repository
+  CodeGraph head_graph = 2; // Graph for the head repository
+  EnrichGraph enrich_head_graph = 3; // Enriched graph for the head repository
 }
 
-message GetDiffRequest {
-  RepositoryData base_repo = 1;
-  RepositoryData head_repo = 2;
+// Request for getting relevant file content based on a diff
+message GetContentFromDiffRequest {
+  RepositoryData head_repo = 1; // The head repository to compare against
+  RepositoryData base_repo = 2; // The base repository to compare against
+  string diff = 3; // Diff in unified diff format
+  string file_path = 4; // Relative path to the file in the head repository
 }
 
-message GetDiffResponse {
-  bytes data = 1;
-  bool is_last = 2;
+// Response for getting relevant file content based on a diff
+message GetContentFromDiffResponse {
+  bytes data = 1; // Serialized diff data
+  bool is_last = 2; // Indicates if this is the last chunk of data
 }
 
+// Generic streamed response for large data transfers
 message StreamedResponse {
-  bytes data = 1;
-  bool is_last = 2;
+  bytes data = 1; // Serialized data for the response
+  bool is_last = 2; // Indicates if this is the last chunk of data
 }
