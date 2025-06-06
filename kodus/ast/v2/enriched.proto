@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package kodus.ast.v2;
 
+import "kodus/ast/v2/tree_sitter.proto";
+
 // Node types
 enum NodeType {
   NODE_TYPE_UNSPECIFIED = 0;
@@ -26,9 +28,10 @@ enum RelationshipType {
 // Node in the enriched graph
 message EnrichGraphNode {
   string id = 1;
-  NodeType type = 2;
-  string file = 3;
-  string file_path = 4;
+  Range position = 2;
+  NodeType type = 3;
+  string file = 4;
+  string file_path = 5;
 }
 
 // Edge/relationship in the enriched graph

@@ -5,6 +5,7 @@
 // source: kodus/ast/v2/graph.proto
 
 /* eslint-disable */
+import { Range } from "./tree_sitter";
 
 /** Enum for scope types */
 export enum ScopeType {
@@ -30,18 +31,6 @@ export enum QueryType {
   QUERY_TYPE_FUNCTION_CALL = 7,
   QUERY_TYPE_FUNCTION_PARAMETERS = 8,
   UNRECOGNIZED = -1,
-}
-
-export interface Point {
-  row: number;
-  column: number;
-}
-
-export interface Range {
-  startIndex: number;
-  endIndex: number;
-  startPosition: Point | undefined;
-  endPosition: Point | undefined;
 }
 
 /** Represents a scope */

@@ -8,4 +8,5 @@ tslib_1.__exportStar(require("./analyzer"), exports);
 tslib_1.__exportStar(require("./enriched"), exports);
 tslib_1.__exportStar(require("./graph"), exports);
 tslib_1.__exportStar(require("./repo"), exports);
+tslib_1.__exportStar(require("./tree_sitter"), exports);
 //# sourceMappingURL=index.js.map

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package kodus.ast.v2;
 
+import "kodus/ast/v2/tree_sitter.proto";
+
 // Enum for scope types
 enum ScopeType {
   SCOPE_TYPE_UNSPECIFIED = 0;
@@ -24,18 +26,6 @@ enum QueryType {
   QUERY_TYPE_FUNCTION = 6;
   QUERY_TYPE_FUNCTION_CALL = 7;
   QUERY_TYPE_FUNCTION_PARAMETERS = 8;
-}
-
-message Point {
-  int32 row = 1;
-  int32 column = 2;
-}
-
-message Range {
-  int32 start_index = 1;
-  int32 end_index = 2;
-  Point start_position = 3;
-  Point end_position = 4;
 }
 
 // Represents a scope

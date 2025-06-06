@@ -1,3 +1,4 @@
+import { Range } from "./tree_sitter";
 /** Node types */
 export declare enum NodeType {
     NODE_TYPE_UNSPECIFIED = 0,
@@ -22,6 +23,7 @@ export declare enum RelationshipType {
 /** Node in the enriched graph */
 export interface EnrichGraphNode {
     id: string;
+    position: Range | undefined;
     type: NodeType;
     file: string;
     filePath: string;

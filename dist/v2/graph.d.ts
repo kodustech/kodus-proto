@@ -1,3 +1,4 @@
+import { Range } from "./tree_sitter";
 /** Enum for scope types */
 export declare enum ScopeType {
     SCOPE_TYPE_UNSPECIFIED = 0,
@@ -21,16 +22,6 @@ export declare enum QueryType {
     QUERY_TYPE_FUNCTION_CALL = 7,
     QUERY_TYPE_FUNCTION_PARAMETERS = 8,
     UNRECOGNIZED = -1
-}
-export interface Point {
-    row: number;
-    column: number;
-}
-export interface Range {
-    startIndex: number;
-    endIndex: number;
-    startPosition: Point | undefined;
-    endPosition: Point | undefined;
 }
 /** Represents a scope */
 export interface Scope {

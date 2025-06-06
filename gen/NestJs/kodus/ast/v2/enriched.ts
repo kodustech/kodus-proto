@@ -5,6 +5,7 @@
 // source: kodus/ast/v2/enriched.proto
 
 /* eslint-disable */
+import { Range } from "./tree_sitter";
 
 /** Node types */
 export enum NodeType {
@@ -32,6 +33,7 @@ export enum RelationshipType {
 /** Node in the enriched graph */
 export interface EnrichGraphNode {
   id: string;
+  position: Range | undefined;
   type: NodeType;
   file: string;
   filePath: string;

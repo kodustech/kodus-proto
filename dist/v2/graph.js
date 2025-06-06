@@ -6,7 +6,6 @@
 // source: kodus/ast/v2/graph.proto
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QueryType = exports.ScopeType = void 0;
-/* eslint-disable */
 /** Enum for scope types */
 var ScopeType;
 (function (ScopeType) {

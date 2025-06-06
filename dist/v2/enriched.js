@@ -6,7 +6,6 @@
 // source: kodus/ast/v2/enriched.proto
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RelationshipType = exports.NodeType = void 0;
-/* eslint-disable */
 /** Node types */
 var NodeType;
 (function (NodeType) {
