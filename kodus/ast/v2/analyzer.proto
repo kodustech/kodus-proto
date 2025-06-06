@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package kodus.ast.v2;
 
-import "kodus/ast/v2/repo.proto";
 import "kodus/ast/v2/enriched.proto";
 import "kodus/ast/v2/graph.proto";
+import "kodus/ast/v2/repo.proto";
 
 service ASTAnalyzerService {
   rpc InitializeRepository(InitializeRepositoryRequest) returns (InitializeRepositoryResponse);
@@ -39,9 +39,9 @@ message GetGraphsResponse {
 }
 
 message GetGraphsResponseData {
-    CodeGraph base_graph = 1;
-    CodeGraph head_graph = 2;
-    EnrichGraph enrich_head_graph = 3;
+  CodeGraph base_graph = 1;
+  CodeGraph head_graph = 2;
+  EnrichGraph enrich_head_graph = 3;
 }
 
 message GetDiffRequest {
@@ -50,6 +50,11 @@ message GetDiffRequest {
 }
 
 message GetDiffResponse {
+  bytes data = 1;
+  bool is_last = 2;
+}
+
+message StreamedResponse {
   bytes data = 1;
   bool is_last = 2;
 }

@@ -35,6 +35,10 @@ export interface GetDiffResponse {
     data: Uint8Array;
     isLast: boolean;
 }
+export interface StreamedResponse {
+    data: Uint8Array;
+    isLast: boolean;
+}
 export interface ASTAnalyzerServiceClient {
     initializeRepository(request: InitializeRepositoryRequest): Observable<InitializeRepositoryResponse>;
     deleteRepository(request: DeleteRepositoryRequest): Observable<DeleteRepositoryResponse>;

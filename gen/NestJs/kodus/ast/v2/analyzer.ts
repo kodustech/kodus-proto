@@ -53,6 +53,11 @@ export interface GetDiffResponse {
   isLast: boolean;
 }
 
+export interface StreamedResponse {
+  data: Uint8Array;
+  isLast: boolean;
+}
+
 export interface ASTAnalyzerServiceClient {
   initializeRepository(request: InitializeRepositoryRequest): Observable<InitializeRepositoryResponse>;
 
