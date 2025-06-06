@@ -51,8 +51,13 @@ message GetGraphsResponse {
 
 // Deserialized response data for GetGraphs
 message GetGraphsResponseData {
-  CodeGraph base_graph = 1; // Graph for the base repository
-  CodeGraph head_graph = 2; // Graph for the head repository
+  message Graph {
+    CodeGraph graph = 1;
+    string dir = 2;
+  }
+
+  Graph base_graph = 1; // Graph for the base repository
+  Graph head_graph = 2; // Graph for the head repository
   EnrichGraph enrich_head_graph = 3; // Enriched graph for the head repository
 }
 

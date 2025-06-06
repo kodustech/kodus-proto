@@ -57,14 +57,19 @@ export interface GetGraphsResponse {
 export interface GetGraphsResponseData {
   /** Graph for the base repository */
   baseGraph:
-    | CodeGraph
+    | GetGraphsResponseData_Graph
     | undefined;
   /** Graph for the head repository */
   headGraph:
-    | CodeGraph
+    | GetGraphsResponseData_Graph
     | undefined;
   /** Enriched graph for the head repository */
   enrichHeadGraph: EnrichGraph | undefined;
+}
+
+export interface GetGraphsResponseData_Graph {
+  graph: CodeGraph | undefined;
+  dir: string;
 }
 
 /** Request for getting relevant file content based on a diff */

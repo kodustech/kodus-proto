@@ -1,3 +1,4 @@
+/** Enum for scope types */
 export declare enum ScopeType {
     SCOPE_TYPE_UNSPECIFIED = 0,
     SCOPE_TYPE_FILE = 1,
@@ -8,6 +9,7 @@ export declare enum ScopeType {
     SCOPE_TYPE_METHOD = 6,
     UNRECOGNIZED = -1
 }
+/** Enum for type kind */
 export declare enum QueryType {
     QUERY_TYPE_UNSPECIFIED = 0,
     QUERY_TYPE_IMPORT = 1,
@@ -20,16 +22,19 @@ export declare enum QueryType {
     QUERY_TYPE_FUNCTION_PARAMETERS = 8,
     UNRECOGNIZED = -1
 }
+/** Represents a scope */
 export interface Scope {
     type: ScopeType;
     name: string;
 }
+/** Represents a function call */
 export interface Call {
     nodeId: number;
     function: string;
     file: string;
     caller?: string | undefined;
 }
+/** Represents file analysis information */
 export interface FileAnalysis {
     defines: string[];
     calls: Call[];
@@ -47,6 +52,7 @@ export interface FileAnalysis_Dependencies {
     direct: string[];
     transitive: string[];
 }
+/** Represents detailed function analysis */
 export interface FunctionAnalysis {
     nodeId: number;
     file: string;
@@ -62,6 +68,7 @@ export interface FunctionAnalysis {
     signatureHash: string;
     fullText?: string | undefined;
 }
+/** Represents detailed type analysis */
 export interface TypeAnalysis {
     nodeId: number;
     file: string;
@@ -80,6 +87,7 @@ export interface TypeAnalysis_FieldsEntry {
     key: string;
     value: string;
 }
+/** Represents the complete code graph */
 export interface CodeGraph {
     files: {
         [key: string]: FileAnalysis;
