@@ -4,54 +4,36 @@ exports.ASTDeserializer = void 0;
 const enriched_1 = require("./enriched");
 const v2_1 = require("@@g/kodus/ast/v2");
 class ASTDeserializer {
-    deserializeEnrichedGraph(serialized) {
+    static deserializeEnrichedGraph(serialized) {
         const nodes = serialized.nodes.map((node) => ({
             ...node,
-            type: this.deserializeNodeType(node.type),
+            type: this.nodeTypeMap[node.type] ?? enriched_1.NodeType.CLASS, // Default
         }));
         const relationships = serialized.relationships.map((relationship) => ({
             ...relationship,
-            type: this.deserializeRelationshipType(relationship.type),
+            type: this.relationshipTypeMap[relationship.type] ??
+                enriched_1.RelationshipType.CALLS, // Default
         }));
         return {
             nodes,
             relationships,
         };
     }
-    deserializeNodeType(serializedType) {
-        switch (serializedType) {
-            case v2_1.NodeType.NODE_TYPE_CLASS:
-                return enriched_1.NodeType.CLASS;
-            case v2_1.NodeType.NODE_TYPE_FUNCTION:
-                return enriched_1.NodeType.FUNCTION;
-            case v2_1.NodeType.NODE_TYPE_INTERFACE:
-                return enriched_1.NodeType.INTERFACE;
-            case v2_1.NodeType.NODE_TYPE_METHOD:
-                return enriched_1.NodeType.METHOD;
-            default:
-                throw new Error(`Unknown node type: ${serializedType}`);
-        }
-    }
-    deserializeRelationshipType(serializedType) {
-        switch (serializedType) {
-            case v2_1.RelationshipType.RELATIONSHIP_TYPE_CALLS:
-                return enriched_1.RelationshipType.CALLS;
-            case v2_1.RelationshipType.RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION:
-                return enriched_1.RelationshipType.CALLS_IMPLEMENTATION;
-            case v2_1.RelationshipType.RELATIONSHIP_TYPE_HAS_METHOD:
-                return enriched_1.RelationshipType.HAS_METHOD;
-            case v2_1.RelationshipType.RELATIONSHIP_TYPE_IMPORTS:
-                return enriched_1.RelationshipType.IMPORTS;
-            case v2_1.RelationshipType.RELATIONSHIP_TYPE_IMPLEMENTS:
-                return enriched_1.RelationshipType.IMPLEMENTS;
-            case v2_1.RelationshipType.RELATIONSHIP_TYPE_IMPLEMENTED_BY:
-                return enriched_1.RelationshipType.IMPLEMENTED_BY;
-            case v2_1.RelationshipType.RELATIONSHIP_TYPE_EXTENDS:
-                return enriched_1.RelationshipType.EXTENDS;
-            default:
-                throw new Error(`Unknown relationship type: ${serializedType}`);
-        }
-    }
+    static nodeTypeMap = {
+        [v2_1.NodeType.NODE_TYPE_CLASS]: enriched_1.NodeType.CLASS,
+        [v2_1.NodeType.NODE_TYPE_FUNCTION]: enriched_1.NodeType.FUNCTION,
+        [v2_1.NodeType.NODE_TYPE_INTERFACE]: enriched_1.NodeType.INTERFACE,
+        [v2_1.NodeType.NODE_TYPE_METHOD]: enriched_1.NodeType.METHOD,
+    };
+    static relationshipTypeMap = {
+        [v2_1.RelationshipType.RELATIONSHIP_TYPE_CALLS]: enriched_1.RelationshipType.CALLS,
+        [v2_1.RelationshipType.RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION]: enriched_1.RelationshipType.CALLS_IMPLEMENTATION,
+        [v2_1.RelationshipType.RELATIONSHIP_TYPE_HAS_METHOD]: enriched_1.RelationshipType.HAS_METHOD,
+        [v2_1.RelationshipType.RELATIONSHIP_TYPE_IMPORTS]: enriched_1.RelationshipType.IMPORTS,
+        [v2_1.RelationshipType.RELATIONSHIP_TYPE_IMPLEMENTS]: enriched_1.RelationshipType.IMPLEMENTS,
+        [v2_1.RelationshipType.RELATIONSHIP_TYPE_IMPLEMENTED_BY]: enriched_1.RelationshipType.IMPLEMENTED_BY,
+        [v2_1.RelationshipType.RELATIONSHIP_TYPE_EXTENDS]: enriched_1.RelationshipType.EXTENDS,
+    };
 }
 exports.ASTDeserializer = ASTDeserializer;
 //# sourceMappingURL=deserializer.js.map
