@@ -77,9 +77,7 @@ export interface TypeAnalysis {
     file: string;
     type: QueryType;
     name: string;
-    fields: {
-        [key: string]: string;
-    };
+    fields: Map<string, string>;
     implements: string[];
     implementedBy: string[];
     extends: string[];
@@ -101,18 +99,10 @@ export interface AnalysisNode {
 }
 /** Represents the complete code graph */
 export interface CodeGraph {
-    files: {
-        [key: string]: FileAnalysis;
-    };
-    functions: {
-        [key: string]: FunctionAnalysis;
-    };
-    types: {
-        [key: string]: TypeAnalysis;
-    };
-    analysisNodes: {
-        [key: number]: AnalysisNode;
-    };
+    files: Map<string, FileAnalysis>;
+    functions: Map<string, FunctionAnalysis>;
+    types: Map<string, TypeAnalysis>;
+    analysisNodes: Map<number, AnalysisNode>;
 }
 export interface CodeGraph_FilesEntry {
     key: string;

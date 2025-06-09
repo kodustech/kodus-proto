@@ -4,6 +4,6 @@ managed:
 plugins:
     - local: node_modules/.bin/protoc-gen-ts_proto
       out: gen/NestJs
-      opt: nestJs=true,exportCommonSymbols=false
+      opt: nestJs=true,exportCommonSymbols=false,useMapType=true
 inputs:
     - directory: .
