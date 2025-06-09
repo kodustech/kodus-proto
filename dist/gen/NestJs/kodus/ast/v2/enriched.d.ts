@@ -22,7 +22,8 @@ export declare enum RelationshipType {
 }
 /** Node in the enriched graph */
 export interface EnrichGraphNode {
-    id: string;
+    id: number;
+    name: string;
     position: Range | undefined;
     type: NodeType;
     file: string;

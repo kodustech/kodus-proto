@@ -11,20 +11,27 @@
     "license": "AGPL-3.0-only",
     "peerDependencies": {
         "@nestjs/microservices": "^11.0.12",
-        "rxjs": "^7.8.2"
+        "rxjs": "^7.8.2",
+        "tree-sitter": "^0.25.0"
     },
     "scripts": {
         "prepack": "rm -rf dist gen && yarn generate && yarn generate-barrels && yarn types",
         "docker:prepack": "docker compose -f docker-compose.yml up --abort-on-container-exit",
         "docker:build": "docker compose -f docker-compose.yml build",
-        "generate-barrels": "barrelsby --delete -c barrelsby.json",
+        "generate-barrels": "barrelsby --delete -c barrelsby.proto.json && barrelsby --delete -c barrelsby.common.json",
         "types": "tsc --noResolve --noCheck",
         "generate": "buf generate",
         "lint": "buf lint"
     },
     "devDependencies": {
         "@bufbuild/buf": "^1.52.1",
+        "@nestjs/common": "^11.1.3",
+        "@nestjs/core": "^11.1.3",
+        "@nestjs/microservices": "^11.1.3",
         "barrelsby": "^2.8.1",
+        "reflect-metadata": "^0.2.2",
+        "rxjs": "^7.8.2",
+        "tree-sitter": "^0.25",
         "ts-proto": "^2.7.0",
         "tslib": "^2.8.1",
         "typescript": "^5.8.3"
