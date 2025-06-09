@@ -37,8 +37,8 @@ message EnrichGraphNode {
 
 // Edge/relationship in the enriched graph
 message EnrichGraphEdge {
-  int32 from = 1;
-  int32 to = 2;
+  string from = 1;
+  string to = 2;
   RelationshipType type = 3;
   string from_path = 4;
   string to_path = 5;

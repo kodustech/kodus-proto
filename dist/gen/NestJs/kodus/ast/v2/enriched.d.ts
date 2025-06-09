@@ -31,8 +31,8 @@ export interface EnrichGraphNode {
 }
 /** Edge/relationship in the enriched graph */
 export interface EnrichGraphEdge {
-    from: number;
-    to: number;
+    from: string;
+    to: string;
     type: RelationshipType;
     fromPath: string;
     toPath: string;
