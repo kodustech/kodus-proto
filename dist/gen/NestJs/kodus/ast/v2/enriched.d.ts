@@ -31,15 +31,16 @@ export interface EnrichGraphNode {
 }
 /** Edge/relationship in the enriched graph */
 export interface EnrichGraphEdge {
-    from: string;
-    to: string;
+    from: number;
+    to: number;
     type: RelationshipType;
     fromPath: string;
     toPath: string;
 }
 /** Impacted node (with optional fields) */
 export interface ImpactedNode {
-    id: string;
+    id: number;
+    name: string;
     type: string;
     severity: string;
     level: number;

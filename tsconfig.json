@@ -21,6 +21,11 @@
       "noEmitHelpers": true,
       "importHelpers": true,
       "inlineSources": true,
+
+      "paths": {
+        "@@g/*": ["gen/NestJs/*"],
+        "@@c/*": ["common/*"],
+      }
   },
   "watchOptions": {
       "watchFile": "useFsEventsOnParentDirectory"

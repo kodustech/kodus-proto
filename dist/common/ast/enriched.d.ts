@@ -23,7 +23,8 @@ export declare enum RelationshipType {
     EXTENDS = "EXTENDS"
 }
 export type ImpactedNode = {
-    id: string;
+    id: number;
+    name: string;
     type: string;
     severity: string;
     level: number;
@@ -32,8 +33,8 @@ export type ImpactedNode = {
     importedBy?: string[];
 };
 export type EnrichGraphEdge = {
-    from: string;
-    to: string;
+    from: number;
+    to: number;
     type: RelationshipType;
     fromPath: string;
     toPath: string;
