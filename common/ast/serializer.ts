@@ -11,7 +11,7 @@ import {
 } from "@@g/kodus/ast/v2";
 
 export class ASTSerializer {
-    serializeCodeGraph(graph: CodeGraph): SerializedCodeGraph {
+    static serializeCodeGraph(graph: CodeGraph): SerializedCodeGraph {
         const files = Object.fromEntries(graph.files.entries());
         const functions = Object.fromEntries(graph.functions.entries());
         const types = {};
@@ -19,7 +19,9 @@ export class ASTSerializer {
         for (const [key, type] of graph.types.entries()) {
             types[key] = {
                 ...type,
-                type: this.serializeQueryType(type.type),
+                type:
+                    this.queryTypeMap[type.type] ??
+                    SerializedQueryType.QUERY_TYPE_UNSPECIFIED,
             };
         }
 
@@ -30,12 +32,14 @@ export class ASTSerializer {
         };
     }
 
-    serializeEnrichedGraph(graph: EnrichGraph): SerializedEnrichGraph {
+    static serializeEnrichedGraph(graph: EnrichGraph): SerializedEnrichGraph {
         const nodes = graph.nodes.map(
             (n) =>
                 ({
                     ...n,
-                    type: this.serializeNodeType(n.type),
+                    type:
+                        this.nodeTypeMap[n.type] ??
+                        SerializedNodeType.NODE_TYPE_UNSPECIFIED,
                 } as SerializedEnrichGraphNode)
         );
 
@@ -43,7 +47,9 @@ export class ASTSerializer {
             (r) =>
                 ({
                     ...r,
-                    type: this.serializeRelationshipType(r.type),
+                    type:
+                        this.relationshipTypeMap[r.type] ??
+                        SerializedRelationshipType.RELATIONSHIP_TYPE_UNSPECIFIED,
                 } as SerializedEnrichGraphEdge)
         );
 
@@ -53,64 +59,47 @@ export class ASTSerializer {
         };
     }
 
-    private serializeQueryType(type: QueryType): SerializedQueryType {
-        switch (type) {
-            case QueryType.CLASS_QUERY:
-                return SerializedQueryType.QUERY_TYPE_CLASS;
-            case QueryType.INTERFACE_QUERY:
-                return SerializedQueryType.QUERY_TYPE_INTERFACE;
-            case QueryType.ENUM_QUERY:
-                return SerializedQueryType.QUERY_TYPE_ENUM;
-            case QueryType.TYPE_ALIAS_QUERY:
-                return SerializedQueryType.QUERY_TYPE_TYPE_ALIAS;
-            case QueryType.FUNCTION_QUERY:
-                return SerializedQueryType.QUERY_TYPE_FUNCTION;
-            case QueryType.FUNCTION_CALL_QUERY:
-                return SerializedQueryType.QUERY_TYPE_FUNCTION_CALL;
-            case QueryType.FUNCTION_PARAMETERS_QUERY:
-                return SerializedQueryType.QUERY_TYPE_FUNCTION_PARAMETERS;
-            case QueryType.IMPORT_QUERY:
-                return SerializedQueryType.QUERY_TYPE_IMPORT;
-            default:
-                return SerializedQueryType.QUERY_TYPE_UNSPECIFIED;
-        }
-    }
+    private static readonly queryTypeMap: Record<
+        QueryType,
+        SerializedQueryType
+    > = {
+        [QueryType.CLASS_QUERY]: SerializedQueryType.QUERY_TYPE_CLASS,
+        [QueryType.INTERFACE_QUERY]: SerializedQueryType.QUERY_TYPE_INTERFACE,
+        [QueryType.ENUM_QUERY]: SerializedQueryType.QUERY_TYPE_ENUM,
+        [QueryType.TYPE_ALIAS_QUERY]: SerializedQueryType.QUERY_TYPE_TYPE_ALIAS,
+        [QueryType.FUNCTION_QUERY]: SerializedQueryType.QUERY_TYPE_FUNCTION,
+        [QueryType.FUNCTION_CALL_QUERY]:
+            SerializedQueryType.QUERY_TYPE_FUNCTION_CALL,
+        [QueryType.FUNCTION_PARAMETERS_QUERY]:
+            SerializedQueryType.QUERY_TYPE_FUNCTION_PARAMETERS,
+        [QueryType.IMPORT_QUERY]: SerializedQueryType.QUERY_TYPE_IMPORT,
+    };
 
-    private serializeNodeType(type: NodeType): SerializedNodeType {
-        switch (type) {
-            case NodeType.CLASS:
-                return SerializedNodeType.NODE_TYPE_CLASS;
-            case NodeType.METHOD:
-                return SerializedNodeType.NODE_TYPE_METHOD;
-            case NodeType.FUNCTION:
-                return SerializedNodeType.NODE_TYPE_FUNCTION;
-            case NodeType.INTERFACE:
-                return SerializedNodeType.NODE_TYPE_INTERFACE;
-            default:
-                return SerializedNodeType.NODE_TYPE_UNSPECIFIED;
-        }
-    }
+    private static readonly nodeTypeMap: Record<NodeType, SerializedNodeType> =
+        {
+            [NodeType.CLASS]: SerializedNodeType.NODE_TYPE_CLASS,
+            [NodeType.METHOD]: SerializedNodeType.NODE_TYPE_METHOD,
+            [NodeType.FUNCTION]: SerializedNodeType.NODE_TYPE_FUNCTION,
+            [NodeType.INTERFACE]: SerializedNodeType.NODE_TYPE_INTERFACE,
+        };
 
-    private serializeRelationshipType(
-        type: RelationshipType
-    ): SerializedRelationshipType {
-        switch (type) {
-            case RelationshipType.CALLS:
-                return SerializedRelationshipType.RELATIONSHIP_TYPE_CALLS;
-            case RelationshipType.CALLS_IMPLEMENTATION:
-                return SerializedRelationshipType.RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION;
-            case RelationshipType.HAS_METHOD:
-                return SerializedRelationshipType.RELATIONSHIP_TYPE_HAS_METHOD;
-            case RelationshipType.IMPORTS:
-                return SerializedRelationshipType.RELATIONSHIP_TYPE_IMPORTS;
-            case RelationshipType.IMPLEMENTS:
-                return SerializedRelationshipType.RELATIONSHIP_TYPE_IMPLEMENTS;
-            case RelationshipType.IMPLEMENTED_BY:
-                return SerializedRelationshipType.RELATIONSHIP_TYPE_IMPLEMENTED_BY;
-            case RelationshipType.EXTENDS:
-                return SerializedRelationshipType.RELATIONSHIP_TYPE_EXTENDS;
-            default:
-                return SerializedRelationshipType.RELATIONSHIP_TYPE_UNSPECIFIED;
-        }
-    }
+    private static readonly relationshipTypeMap: Record<
+        RelationshipType,
+        SerializedRelationshipType
+    > = {
+        [RelationshipType.CALLS]:
+            SerializedRelationshipType.RELATIONSHIP_TYPE_CALLS,
+        [RelationshipType.CALLS_IMPLEMENTATION]:
+            SerializedRelationshipType.RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION,
+        [RelationshipType.HAS_METHOD]:
+            SerializedRelationshipType.RELATIONSHIP_TYPE_HAS_METHOD,
+        [RelationshipType.IMPORTS]:
+            SerializedRelationshipType.RELATIONSHIP_TYPE_IMPORTS,
+        [RelationshipType.IMPLEMENTS]:
+            SerializedRelationshipType.RELATIONSHIP_TYPE_IMPLEMENTS,
+        [RelationshipType.IMPLEMENTED_BY]:
+            SerializedRelationshipType.RELATIONSHIP_TYPE_IMPLEMENTED_BY,
+        [RelationshipType.EXTENDS]:
+            SerializedRelationshipType.RELATIONSHIP_TYPE_EXTENDS,
+    };
 }

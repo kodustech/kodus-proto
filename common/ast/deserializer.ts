@@ -6,15 +6,19 @@ import {
 } from "@@g/kodus/ast/v2";
 
 export class ASTDeserializer {
-    deserializeEnrichedGraph(serialized: SerializedEnrichGraph): EnrichGraph {
+    static deserializeEnrichedGraph(
+        serialized: SerializedEnrichGraph
+    ): EnrichGraph {
         const nodes = serialized.nodes.map((node) => ({
             ...node,
-            type: this.deserializeNodeType(node.type),
+            type: this.nodeTypeMap[node.type] ?? NodeType.CLASS, // Default
         }));
 
         const relationships = serialized.relationships.map((relationship) => ({
             ...relationship,
-            type: this.deserializeRelationshipType(relationship.type),
+            type:
+                this.relationshipTypeMap[relationship.type] ??
+                RelationshipType.CALLS, // Default
         }));
 
         return {
@@ -23,41 +27,41 @@ export class ASTDeserializer {
         };
     }
 
-    private deserializeNodeType(serializedType: SerializedNodeType): NodeType {
-        switch (serializedType) {
-            case SerializedNodeType.NODE_TYPE_CLASS:
-                return NodeType.CLASS;
-            case SerializedNodeType.NODE_TYPE_FUNCTION:
-                return NodeType.FUNCTION;
-            case SerializedNodeType.NODE_TYPE_INTERFACE:
-                return NodeType.INTERFACE;
-            case SerializedNodeType.NODE_TYPE_METHOD:
-                return NodeType.METHOD;
-            default:
-                throw new Error(`Unknown node type: ${serializedType}`);
-        }
-    }
+    private static readonly nodeTypeMap: Record<
+        Exclude<
+            SerializedNodeType,
+            | SerializedNodeType.UNRECOGNIZED
+            | SerializedNodeType.NODE_TYPE_UNSPECIFIED
+        >,
+        NodeType
+    > = {
+        [SerializedNodeType.NODE_TYPE_CLASS]: NodeType.CLASS,
+        [SerializedNodeType.NODE_TYPE_FUNCTION]: NodeType.FUNCTION,
+        [SerializedNodeType.NODE_TYPE_INTERFACE]: NodeType.INTERFACE,
+        [SerializedNodeType.NODE_TYPE_METHOD]: NodeType.METHOD,
+    };
 
-    private deserializeRelationshipType(
-        serializedType: SerializedRelationshipType
-    ): RelationshipType {
-        switch (serializedType) {
-            case SerializedRelationshipType.RELATIONSHIP_TYPE_CALLS:
-                return RelationshipType.CALLS;
-            case SerializedRelationshipType.RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION:
-                return RelationshipType.CALLS_IMPLEMENTATION;
-            case SerializedRelationshipType.RELATIONSHIP_TYPE_HAS_METHOD:
-                return RelationshipType.HAS_METHOD;
-            case SerializedRelationshipType.RELATIONSHIP_TYPE_IMPORTS:
-                return RelationshipType.IMPORTS;
-            case SerializedRelationshipType.RELATIONSHIP_TYPE_IMPLEMENTS:
-                return RelationshipType.IMPLEMENTS;
-            case SerializedRelationshipType.RELATIONSHIP_TYPE_IMPLEMENTED_BY:
-                return RelationshipType.IMPLEMENTED_BY;
-            case SerializedRelationshipType.RELATIONSHIP_TYPE_EXTENDS:
-                return RelationshipType.EXTENDS;
-            default:
-                throw new Error(`Unknown relationship type: ${serializedType}`);
-        }
-    }
+    private static readonly relationshipTypeMap: Record<
+        Exclude<
+            SerializedRelationshipType,
+            | SerializedRelationshipType.UNRECOGNIZED
+            | SerializedRelationshipType.RELATIONSHIP_TYPE_UNSPECIFIED
+        >,
+        RelationshipType
+    > = {
+        [SerializedRelationshipType.RELATIONSHIP_TYPE_CALLS]:
+            RelationshipType.CALLS,
+        [SerializedRelationshipType.RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION]:
+            RelationshipType.CALLS_IMPLEMENTATION,
+        [SerializedRelationshipType.RELATIONSHIP_TYPE_HAS_METHOD]:
+            RelationshipType.HAS_METHOD,
+        [SerializedRelationshipType.RELATIONSHIP_TYPE_IMPORTS]:
+            RelationshipType.IMPORTS,
+        [SerializedRelationshipType.RELATIONSHIP_TYPE_IMPLEMENTS]:
+            RelationshipType.IMPLEMENTS,
+        [SerializedRelationshipType.RELATIONSHIP_TYPE_IMPLEMENTED_BY]:
+            RelationshipType.IMPLEMENTED_BY,
+        [SerializedRelationshipType.RELATIONSHIP_TYPE_EXTENDS]:
+            RelationshipType.EXTENDS,
+    };
 }
