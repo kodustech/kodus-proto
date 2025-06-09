@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ASTSerializer = void 0;
 const graph_1 = require("./graph");
 const enriched_1 = require("./enriched");
-const v2_1 = require("@@g/kodus/ast/v2");
+const v2_1 = require("gen/NestJs/kodus/ast/v2");
 class ASTSerializer {
     static serializeCodeGraph(graph) {
         const files = Object.fromEntries(graph.files.entries());
