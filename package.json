@@ -47,14 +47,14 @@
             "types": "./dist/common/ast/index.d.ts"
         },
         "./v1": {
-            "import": "./dist/gen/NestJs/kodus/v1/index.js",
-            "require": "./dist/gen/NestJs/kodus/v1/index.js",
-            "types": "./dist/gen/NestJs/kodus/v1/index.d.ts"
+            "import": "./dist/gen/NestJs/kodus/ast/v1/index.js",
+            "require": "./dist/gen/NestJs/kodus/ast/v1/index.js",
+            "types": "./dist/gen/NestJs/kodus/ast/v1/index.d.ts"
         },
         "./v2": {
-            "import": "./dist/gen/NestJs/kodus/v2/index.js",
-            "require": "./dist/gen/NestJs/kodus/v2/index.js",
-            "types": "./dist/gen/NestJs/kodus/v2/index.d.ts"
+            "import": "./dist/gen/NestJs/kodus/ast/v2/index.js",
+            "require": "./dist/gen/NestJs/kodus/ast/v2/index.js",
+            "types": "./dist/gen/NestJs/kodus/ast/v2/index.d.ts"
         },
         "./package.json": "./package.json"
     },
@@ -64,10 +64,10 @@
                 "./dist/common/ast"
             ],
             "v1": [
-                "./dist/gen/NestJs/kodus/v1"
+                "./dist/gen/NestJs/kodus/ast/v1"
             ],
             "v2": [
-                "./dist/gen/NestJs/kodus/v2"
+                "./dist/gen/NestJs/kodus/ast/v2"
             ]
         }
     },
