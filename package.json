@@ -41,6 +41,11 @@
         "kodus/**/*"
     ],
     "exports": {
+        "./common/ast": {
+            "import": "./dist/common/ast/index.js",
+            "require": "./dist/common/ast/index.js",
+            "types": "./dist/common/ast/index.d.ts"
+        },
         "./v1": {
             "import": "./dist/v1/index.js",
             "require": "./dist/v1/index.js",
@@ -55,6 +60,9 @@
     },
     "typesVersions": {
         "*": {
+            "common/ast": [
+                "./dist/common/ast"
+            ],
             "v1": [
                 "./dist/v1"
             ],
