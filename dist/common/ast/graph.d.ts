@@ -71,7 +71,7 @@ export type FunctionAnalysis = {
     functionHash: string;
     signatureHash: string;
     bodyNode?: any;
-    fullText: string;
+    fullText?: string;
 };
 /**
  * Details of a type (interface, type alias, or enum)

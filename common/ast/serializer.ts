@@ -1,4 +1,4 @@
-import { CodeGraph, QueryType } from "./graph";
+import { AnalysisNode, CodeGraph, QueryType } from "./graph";
 import { EnrichGraph, NodeType, RelationshipType } from "./enriched";
 import {
     CodeGraph as SerializedCodeGraph,
@@ -8,12 +8,14 @@ import {
     QueryType as SerializedQueryType,
     NodeType as SerializedNodeType,
     RelationshipType as SerializedRelationshipType,
+    AnalysisNode as SerializedAnalysisNode,
 } from "../../gen/NestJs/kodus/ast/v2";
 export class ASTSerializer {
     static serializeCodeGraph(graph: CodeGraph): SerializedCodeGraph {
         const files = Object.fromEntries(graph.files.entries());
         const functions = Object.fromEntries(graph.functions.entries());
         const types = {};
+        const analysisNodes = {};
 
         for (const [key, type] of graph.types.entries()) {
             types[key] = {
@@ -24,10 +26,27 @@ export class ASTSerializer {
             };
         }
 
+        const serializeAnalysisNode = (
+            node: AnalysisNode
+        ): SerializedAnalysisNode => ({
+            ...node,
+            queryType:
+                this.queryTypeMap[node.queryType] ??
+                SerializedQueryType.QUERY_TYPE_UNSPECIFIED,
+            children: node.children
+                ? node.children.map(serializeAnalysisNode)
+                : [],
+        });
+
+        for (const [key, node] of graph.analysisNodes.entries()) {
+            analysisNodes[key] = serializeAnalysisNode(node);
+        }
+
         return {
-            files: files,
-            functions: functions,
-            types: types,
+            files,
+            functions,
+            types,
+            analysisNodes,
         };
     }
 

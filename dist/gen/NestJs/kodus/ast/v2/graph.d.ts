@@ -90,6 +90,15 @@ export interface TypeAnalysis_FieldsEntry {
     key: string;
     value: string;
 }
+/** Represents a node in the analysis tree */
+export interface AnalysisNode {
+    text: string;
+    type: string;
+    queryType: QueryType;
+    id: number;
+    children: AnalysisNode[];
+    position: Range | undefined;
+}
 /** Represents the complete code graph */
 export interface CodeGraph {
     files: {
@@ -100,6 +109,9 @@ export interface CodeGraph {
     };
     types: {
         [key: string]: TypeAnalysis;
+    };
+    analysisNodes: {
+        [key: number]: AnalysisNode;
     };
 }
 export interface CodeGraph_FilesEntry {
@@ -113,4 +125,8 @@ export interface CodeGraph_FunctionsEntry {
 export interface CodeGraph_TypesEntry {
     key: string;
     value: TypeAnalysis | undefined;
+}
+export interface CodeGraph_AnalysisNodesEntry {
+    key: number;
+    value: AnalysisNode | undefined;
 }

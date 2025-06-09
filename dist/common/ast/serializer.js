@@ -9,6 +9,7 @@ class ASTSerializer {
         const files = Object.fromEntries(graph.files.entries());
         const functions = Object.fromEntries(graph.functions.entries());
         const types = {};
+        const analysisNodes = {};
         for (const [key, type] of graph.types.entries()) {
             types[key] = {
                 ...type,
@@ -16,10 +17,22 @@ class ASTSerializer {
                     v2_1.QueryType.QUERY_TYPE_UNSPECIFIED,
             };
         }
+        const serializeAnalysisNode = (node) => ({
+            ...node,
+            queryType: this.queryTypeMap[node.queryType] ??
+                v2_1.QueryType.QUERY_TYPE_UNSPECIFIED,
+            children: node.children
+                ? node.children.map(serializeAnalysisNode)
+                : [],
+        });
+        for (const [key, node] of graph.analysisNodes.entries()) {
+            analysisNodes[key] = serializeAnalysisNode(node);
+        }
         return {
-            files: files,
-            functions: functions,
-            types: types,
+            files,
+            functions,
+            types,
+            analysisNodes,
         };
     }
     static serializeEnrichedGraph(graph) {
