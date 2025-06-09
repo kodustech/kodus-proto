@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ASTDeserializer = void 0;
 const enriched_1 = require("./enriched");
-const v2_1 = require("gen/NestJs/kodus/ast/v2");
+const v2_1 = require("../../gen/NestJs/kodus/ast/v2");
 class ASTDeserializer {
     static deserializeEnrichedGraph(serialized) {
         const nodes = serialized.nodes.map((node) => ({

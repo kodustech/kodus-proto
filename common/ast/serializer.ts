@@ -8,8 +8,7 @@ import {
     QueryType as SerializedQueryType,
     NodeType as SerializedNodeType,
     RelationshipType as SerializedRelationshipType,
-} from "gen/NestJs/kodus/ast/v2";
-
+} from "../../gen/NestJs/kodus/ast/v2";
 export class ASTSerializer {
     static serializeCodeGraph(graph: CodeGraph): SerializedCodeGraph {
         const files = Object.fromEntries(graph.files.entries());
