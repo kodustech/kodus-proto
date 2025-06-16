@@ -60,7 +60,7 @@
     },
     "typesVersions": {
         "*": {
-            "./serialization/ast": [
+            "serialization/ast": [
                 "./dist/serialization/ast"
             ],
             "v1": [
