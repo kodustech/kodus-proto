@@ -1,31 +1,19 @@
 import { Range } from "./tree_sitter";
-/** Enum for scope types */
-export declare enum ScopeType {
-    SCOPE_TYPE_UNSPECIFIED = 0,
-    SCOPE_TYPE_FILE = 1,
-    SCOPE_TYPE_CLASS = 2,
-    SCOPE_TYPE_INTERFACE = 3,
-    SCOPE_TYPE_ENUM = 4,
-    SCOPE_TYPE_FUNCTION = 5,
-    SCOPE_TYPE_METHOD = 6,
-    UNRECOGNIZED = -1
-}
-/** Enum for type kind */
-export declare enum QueryType {
-    QUERY_TYPE_UNSPECIFIED = 0,
-    QUERY_TYPE_IMPORT = 1,
-    QUERY_TYPE_CLASS = 2,
-    QUERY_TYPE_INTERFACE = 3,
-    QUERY_TYPE_ENUM = 4,
-    QUERY_TYPE_TYPE_ALIAS = 5,
-    QUERY_TYPE_FUNCTION = 6,
-    QUERY_TYPE_FUNCTION_CALL = 7,
-    QUERY_TYPE_FUNCTION_PARAMETERS = 8,
-    UNRECOGNIZED = -1
+export declare enum NodeType {
+    NODE_TYPE_UNSPECIFIED = "NODE_TYPE_UNSPECIFIED",
+    NODE_TYPE_FILE = "NODE_TYPE_FILE",
+    NODE_TYPE_IMPORT = "NODE_TYPE_IMPORT",
+    NODE_TYPE_CLASS = "NODE_TYPE_CLASS",
+    NODE_TYPE_INTERFACE = "NODE_TYPE_INTERFACE",
+    NODE_TYPE_TYPE_ALIAS = "NODE_TYPE_TYPE_ALIAS",
+    NODE_TYPE_ENUM = "NODE_TYPE_ENUM",
+    NODE_TYPE_FUNCTION = "NODE_TYPE_FUNCTION",
+    NODE_TYPE_FUNCTION_CALL = "NODE_TYPE_FUNCTION_CALL",
+    UNRECOGNIZED = "UNRECOGNIZED"
 }
 /** Represents a scope */
 export interface Scope {
-    type: ScopeType;
+    type: NodeType;
     name: string;
 }
 /** Represents a function call */
@@ -43,6 +31,7 @@ export interface FileAnalysis {
     className: string[];
     usedBy?: FileAnalysis_UsedBy | undefined;
     dependencies?: FileAnalysis_Dependencies | undefined;
+    nodes: Map<number, AnalysisNode>;
 }
 export interface FileAnalysis_UsedBy {
     files: string[];
@@ -52,6 +41,10 @@ export interface FileAnalysis_UsedBy {
 export interface FileAnalysis_Dependencies {
     direct: string[];
     transitive: string[];
+}
+export interface FileAnalysis_NodesEntry {
+    key: number;
+    value: AnalysisNode | undefined;
 }
 /** Represents detailed function analysis */
 export interface FunctionAnalysis {
@@ -75,11 +68,9 @@ export interface TypeAnalysis {
     nodeId: number;
     position: Range | undefined;
     file: string;
-    type: QueryType;
+    type: NodeType;
     name: string;
-    fields: {
-        [key: string]: string;
-    };
+    fields: Map<string, string>;
     implements: string[];
     implementedBy: string[];
     extends: string[];
@@ -92,27 +83,18 @@ export interface TypeAnalysis_FieldsEntry {
 }
 /** Represents a node in the analysis tree */
 export interface AnalysisNode {
-    text: string;
-    type: string;
-    queryType: QueryType;
     id: number;
+    name: string;
+    text: string;
+    type: NodeType;
     children: AnalysisNode[];
     position: Range | undefined;
 }
 /** Represents the complete code graph */
 export interface CodeGraph {
-    files: {
-        [key: string]: FileAnalysis;
-    };
-    functions: {
-        [key: string]: FunctionAnalysis;
-    };
-    types: {
-        [key: string]: TypeAnalysis;
-    };
-    analysisNodes: {
-        [key: number]: AnalysisNode;
-    };
+    files: Map<string, FileAnalysis>;
+    functions: Map<string, FunctionAnalysis>;
+    types: Map<string, TypeAnalysis>;
 }
 export interface CodeGraph_FilesEntry {
     key: string;
@@ -125,8 +107,4 @@ export interface CodeGraph_FunctionsEntry {
 export interface CodeGraph_TypesEntry {
     key: string;
     value: TypeAnalysis | undefined;
-}
-export interface CodeGraph_AnalysisNodesEntry {
-    key: number;
-    value: AnalysisNode | undefined;
 }

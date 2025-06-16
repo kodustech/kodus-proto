@@ -7,7 +7,7 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
-import { EnrichGraph } from "./enriched";
+import { EnrichedGraph } from "./enriched";
 import { CodeGraph } from "./graph";
 import { RepositoryData } from "./repo";
 
@@ -64,7 +64,7 @@ export interface GetGraphsResponseData {
     | GetGraphsResponseData_Graph
     | undefined;
   /** Enriched graph for the head repository */
-  enrichHeadGraph: EnrichGraph | undefined;
+  enrichHeadGraph: EnrichedGraph | undefined;
 }
 
 export interface GetGraphsResponseData_Graph {

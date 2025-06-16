@@ -4,33 +4,21 @@ package kodus.ast.v2;
 
 import "kodus/ast/v2/tree_sitter.proto";
 
-// Enum for scope types
-enum ScopeType {
-  SCOPE_TYPE_UNSPECIFIED = 0;
-  SCOPE_TYPE_FILE = 1;
-  SCOPE_TYPE_CLASS = 2;
-  SCOPE_TYPE_INTERFACE = 3;
-  SCOPE_TYPE_ENUM = 4;
-  SCOPE_TYPE_FUNCTION = 5;
-  SCOPE_TYPE_METHOD = 6;
-}
-
-// Enum for type kind
-enum QueryType {
-  QUERY_TYPE_UNSPECIFIED = 0;
-  QUERY_TYPE_IMPORT = 1;
-  QUERY_TYPE_CLASS = 2;
-  QUERY_TYPE_INTERFACE = 3;
-  QUERY_TYPE_ENUM = 4;
-  QUERY_TYPE_TYPE_ALIAS = 5;
-  QUERY_TYPE_FUNCTION = 6;
-  QUERY_TYPE_FUNCTION_CALL = 7;
-  QUERY_TYPE_FUNCTION_PARAMETERS = 8;
+enum NodeType {
+  NODE_TYPE_UNSPECIFIED = 0;
+  NODE_TYPE_FILE = 1;
+  NODE_TYPE_IMPORT = 2;
+  NODE_TYPE_CLASS = 3;
+  NODE_TYPE_INTERFACE = 4;
+  NODE_TYPE_TYPE_ALIAS = 5;
+  NODE_TYPE_ENUM = 6;
+  NODE_TYPE_FUNCTION = 7;
+  NODE_TYPE_FUNCTION_CALL = 8;
 }
 
 // Represents a scope
 message Scope {
-  ScopeType type = 1;
+  NodeType type = 1;
   string name = 2;
 }
 
@@ -61,6 +49,8 @@ message FileAnalysis {
     repeated string transitive = 2;
   }
   optional Dependencies dependencies = 6;
+
+  map<int32, AnalysisNode> nodes = 7;
 }
 
 // Represents detailed function analysis
@@ -86,7 +76,7 @@ message TypeAnalysis {
   int32 node_id = 1;
   Range position = 2;
   string file = 3;
-  QueryType type = 4;
+  NodeType type = 4;
   string name = 5;
   map<string, string> fields = 6;
   repeated string implements = 7;
@@ -98,10 +88,10 @@ message TypeAnalysis {
 
 // Represents a node in the analysis tree
 message AnalysisNode {
-  string text = 1;
-  string type = 2;
-  QueryType query_type = 3;
-  int32 id = 4;
+  int32 id = 1;
+  string name = 2;
+  string text = 3;
+  NodeType type = 4;
   repeated AnalysisNode children = 5;
   Range position = 6;
 }
@@ -111,5 +101,4 @@ message CodeGraph {
   map<string, FileAnalysis> files = 1;
   map<string, FunctionAnalysis> functions = 2;
   map<string, TypeAnalysis> types = 3;
-  map<int32, AnalysisNode> analysis_nodes = 4;
 }

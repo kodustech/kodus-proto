@@ -58,7 +58,7 @@ message GetGraphsResponseData {
 
   Graph base_graph = 1; // Graph for the base repository
   Graph head_graph = 2; // Graph for the head repository
-  EnrichGraph enrich_head_graph = 3; // Enriched graph for the head repository
+  EnrichedGraph enrich_head_graph = 3; // Enriched graph for the head repository
 }
 
 // Request for getting relevant file content based on a diff

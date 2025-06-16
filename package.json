@@ -18,7 +18,7 @@
         "prepack": "rm -rf dist gen && yarn generate && yarn generate-barrels && yarn types",
         "docker:prepack": "docker compose -f docker-compose.yml up --abort-on-container-exit",
         "docker:build": "docker compose -f docker-compose.yml build",
-        "generate-barrels": "barrelsby --delete -c barrelsby.proto.json && barrelsby --delete -c barrelsby.common.json",
+        "generate-barrels": "barrelsby --delete -c barrelsby.json",
         "types": "tsc --noResolve --noCheck",
         "generate": "buf generate",
         "lint": "buf lint"
@@ -41,10 +41,10 @@
         "kodus/**/*"
     ],
     "exports": {
-        "./common/ast": {
-            "import": "./dist/common/ast/index.js",
-            "require": "./dist/common/ast/index.js",
-            "types": "./dist/common/ast/index.d.ts"
+        "./serialization/ast": {
+            "import": "./dist/serialization/ast/index.js",
+            "require": "./dist/serialization/ast/index.js",
+            "types": "./dist/serialization/ast/index.d.ts"
         },
         "./v1": {
             "import": "./dist/gen/NestJs/kodus/ast/v1/index.js",
@@ -60,8 +60,8 @@
     },
     "typesVersions": {
         "*": {
-            "common/ast": [
-                "./dist/common/ast"
+            "./serialization/ast": [
+                "./dist/serialization/ast"
             ],
             "v1": [
                 "./dist/gen/NestJs/kodus/ast/v1"

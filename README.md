@@ -8,7 +8,7 @@ This repository contains the Protobuf definitions used in the Kodus platform. Th
 -   [Buf](https://buf.build/docs/installation/)
 -   [Yarn](https://yarnpkg.com/getting-started/install)
 
-Alternatively, you can use the provided Docker image to run the code generation process without installing the tools locally.
+You can also use the provided Docker image to run the code generation process without installing the tools locally.
 
 ## Installation
 
@@ -31,6 +31,20 @@ Alternatively, you can use the provided Docker image to run the code generation 
     yarn docker:prepack
     ```
 5. The generated code will be available in the `gen` directory.
+
+## Usage in Local Development
+
+To use the package in your local development, before publishing, you can link the package locally:
+
+1. Run the following command in the root of the repository:
+    ```bash
+    yarn link
+    ```
+2. In your project where you want to use the package, run:
+    ```bash
+    yarn link @kodus/kodus-proto
+    ```
+3. This will create a symlink to the local version of the package, allowing you to use it as if it were installed from npm.
 
 ## Publishing
 

@@ -3,6 +3,5 @@
  */
 
 export * from "./deserializer";
-export * from "./enriched";
 export * from "./graph";
 export * from "./serializer";

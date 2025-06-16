@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { EnrichGraph } from "./enriched";
+import { EnrichedGraph } from "./enriched";
 import { CodeGraph } from "./graph";
 import { RepositoryData } from "./repo";
 /** Request for initializing a repository pair */
@@ -41,7 +41,7 @@ export interface GetGraphsResponseData {
     /** Graph for the head repository */
     headGraph: GetGraphsResponseData_Graph | undefined;
     /** Enriched graph for the head repository */
-    enrichHeadGraph: EnrichGraph | undefined;
+    enrichHeadGraph: EnrichedGraph | undefined;
 }
 export interface GetGraphsResponseData_Graph {
     graph: CodeGraph | undefined;

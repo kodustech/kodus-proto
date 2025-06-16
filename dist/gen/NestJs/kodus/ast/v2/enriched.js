@@ -5,28 +5,19 @@
 //   protoc               unknown
 // source: kodus/ast/v2/enriched.proto
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RelationshipType = exports.NodeType = void 0;
-/** Node types */
-var NodeType;
-(function (NodeType) {
-    NodeType[NodeType["NODE_TYPE_UNSPECIFIED"] = 0] = "NODE_TYPE_UNSPECIFIED";
-    NodeType[NodeType["NODE_TYPE_CLASS"] = 1] = "NODE_TYPE_CLASS";
-    NodeType[NodeType["NODE_TYPE_METHOD"] = 2] = "NODE_TYPE_METHOD";
-    NodeType[NodeType["NODE_TYPE_FUNCTION"] = 3] = "NODE_TYPE_FUNCTION";
-    NodeType[NodeType["NODE_TYPE_INTERFACE"] = 4] = "NODE_TYPE_INTERFACE";
-    NodeType[NodeType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
-})(NodeType || (exports.NodeType = NodeType = {}));
+exports.RelationshipType = void 0;
 /** Relationship types */
 var RelationshipType;
 (function (RelationshipType) {
-    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_UNSPECIFIED"] = 0] = "RELATIONSHIP_TYPE_UNSPECIFIED";
-    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_CALLS"] = 1] = "RELATIONSHIP_TYPE_CALLS";
-    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION"] = 2] = "RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION";
-    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_HAS_METHOD"] = 3] = "RELATIONSHIP_TYPE_HAS_METHOD";
-    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_IMPORTS"] = 4] = "RELATIONSHIP_TYPE_IMPORTS";
-    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_IMPLEMENTS"] = 5] = "RELATIONSHIP_TYPE_IMPLEMENTS";
-    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_IMPLEMENTED_BY"] = 6] = "RELATIONSHIP_TYPE_IMPLEMENTED_BY";
-    RelationshipType[RelationshipType["RELATIONSHIP_TYPE_EXTENDS"] = 7] = "RELATIONSHIP_TYPE_EXTENDS";
-    RelationshipType[RelationshipType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+    RelationshipType["RELATIONSHIP_TYPE_UNSPECIFIED"] = "RELATIONSHIP_TYPE_UNSPECIFIED";
+    RelationshipType["RELATIONSHIP_TYPE_CALLS"] = "RELATIONSHIP_TYPE_CALLS";
+    RelationshipType["RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION"] = "RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION";
+    RelationshipType["RELATIONSHIP_TYPE_HAS_METHOD"] = "RELATIONSHIP_TYPE_HAS_METHOD";
+    RelationshipType["RELATIONSHIP_TYPE_IMPORTS"] = "RELATIONSHIP_TYPE_IMPORTS";
+    RelationshipType["RELATIONSHIP_TYPE_IMPLEMENTS"] = "RELATIONSHIP_TYPE_IMPLEMENTS";
+    RelationshipType["RELATIONSHIP_TYPE_IMPLEMENTED_BY"] = "RELATIONSHIP_TYPE_IMPLEMENTED_BY";
+    RelationshipType["RELATIONSHIP_TYPE_EXTENDS"] = "RELATIONSHIP_TYPE_EXTENDS";
+    RelationshipType["RELATIONSHIP_TYPE_EXTENDED_BY"] = "RELATIONSHIP_TYPE_EXTENDED_BY";
+    RelationshipType["UNRECOGNIZED"] = "UNRECOGNIZED";
 })(RelationshipType || (exports.RelationshipType = RelationshipType = {}));
 //# sourceMappingURL=enriched.js.map

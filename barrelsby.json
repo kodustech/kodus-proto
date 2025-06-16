@@ -1,0 +1,5 @@
+{
+    "directory": ["gen/NestJs/kodus/ast", "serialization"],
+    "exclude": ["dist"],
+    "location": "below"
+}
