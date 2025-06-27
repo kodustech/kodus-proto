@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package kodus.ast.v3;
+
+import "kodus/ast/v2/repo.proto";
+import "kodus/ast/v3/impact.proto";
+import "kodus/task/v1/task.proto";
+
+/* The ASTAnalyzerService provides methods for analyzing code repositories */
+service ASTAnalyzerService {
+  /* Initializes a repository pair for analysis */
+  rpc InitializeRepository(InitializeRepositoryRequest) returns (InitializeRepositoryResponse);
+  /* Deletes a repository pair from analysis */
+  rpc DeleteRepository(DeleteRepositoryRequest) returns (DeleteRepositoryResponse);
+
+  /* Retrieves relevant file content based on a diff */
+  rpc GetContentFromDiff(GetContentFromDiffRequest) returns (stream GetContentFromDiffResponse);
+
+  /* Initializes impact analysis for a repository pair */
+  rpc InitializeImpactAnalysis(InitializeImpactAnalysisRequest) returns (InitializeImpactAnalysisResponse);
+  /* Deletes impact analysis for a repository pair */
+  rpc GetImpactAnalysis(GetImpactAnalysisRequest) returns (stream GetImpactAnalysisResponse);
+}
+
+/* Request for initializing a repository pair */
+message InitializeRepositoryRequest {
+  /* The base repository to initialize */
+kodus.ast.v2.RepositoryData base_repo = 1;
+  /* The head repository to initialize */
+kodus.ast.v2.RepositoryData head_repo = 2;
+  /* Priority for the initialization task */
+optional kodus.task.v1.TaskPriority priority = 3;
+  /* Optional list of file paths to filter the initialization */
+repeated string file_paths = 4;
+}
+
+/* Response for initializing a repository pair */
+message InitializeRepositoryResponse {
+  /* Task ID for tracking the initialization process */
+string task_id = 1;
+}
+
+/* Request for deleting a repository pair */
+message DeleteRepositoryRequest {
+  /* The base repository to delete */
+kodus.ast.v2.RepositoryData base_repo = 1;
+  /* The head repository to delete */
+kodus.ast.v2.RepositoryData head_repo = 2;
+}
+
+/* Response for deleting a repository pair */
+message DeleteRepositoryResponse {}
+
+/* Request for getting relevant file content based on a diff */
+message GetContentFromDiffRequest {
+  /* The head repository to compare against */
+kodus.ast.v2.RepositoryData head_repo = 1;
+  /* The base repository to compare against */
+kodus.ast.v2.RepositoryData base_repo = 2;
+  /* Diff in unified diff format */
+string diff = 3;
+  /* Relative path to the file in the head repository */
+string file_path = 4;
+}
+
+/* Response for getting relevant file content based on a diff */
+message GetContentFromDiffResponse {
+  /* Serialized diff data */
+bytes data = 1;
+}
+
+/* Generic streamed response for large data transfers */
+message StreamedResponse {
+  /* Serialized data for the response */
+bytes data = 1;
+}
+
+/* Request for initializing impact analysis */
+message InitializeImpactAnalysisRequest {
+  /* The base repository for impact analysis */
+kodus.ast.v2.RepositoryData base_repo = 1;
+  /* The head repository for impact analysis */
+kodus.ast.v2.RepositoryData head_repo = 2;
+  /* Code chunk to analyze for impact */
+string code_chunk = 3;
+  /* Name of the file containing the code chunk */
+string file_name = 4;
+  /* Priority for the impact analysis */
+optional kodus.task.v1.TaskPriority priority = 5;
+}
+
+/* Response for initializing impact analysis */
+message InitializeImpactAnalysisResponse {
+  /* Task ID for tracking the impact analysis process */
+string task_id = 1;
+}
+
+/* Request for getting impact analysis results */
+message GetImpactAnalysisRequest {
+  /* The base repository for impact analysis */
+kodus.ast.v2.RepositoryData base_repo = 1;
+  /* The head repository for impact analysis */
+kodus.ast.v2.RepositoryData head_repo = 2;
+}
+
+/* Response for getting impact analysis results */
+message GetImpactAnalysisResponse {
+  /* List of affected functions */
+repeated FunctionsAffectResult functions_affect = 1;
+  /* List of function similarities */
+repeated FunctionSimilarity function_similarity = 2;
+}

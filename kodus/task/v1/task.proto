@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package kodus.task.v1;
+
+import "google/protobuf/timestamp.proto";
+
+/* TaskStatus represents the current status of a task in the Kodus system. */
+enum TaskStatus {
+  /* Unspecified status, used for default initialization */
+  TASK_STATUS_UNSPECIFIED = 0;
+  /* Task is pending and waiting to be processed */
+  TASK_STATUS_PENDING = 1;
+  /* Task is currently in progress */
+  TASK_STATUS_IN_PROGRESS = 2;
+  /* Task has been completed successfully */
+  TASK_STATUS_COMPLETED = 3;
+  /* Task has failed, typically due to an error */
+  TASK_STATUS_FAILED = 4;
+  /* Task has been cancelled, either by user request or system intervention */
+  TASK_STATUS_CANCELLED = 5;
+}
+
+/* TaskPriority represents the priority level of a task in the Kodus system. */
+enum TaskPriority {
+  /* Unspecified priority, used for default initialization */
+  TASK_PRIORITY_UNSPECIFIED = 0;
+  /* Low priority task, typically for non-critical operations */
+  TASK_PRIORITY_LOW = 1;
+  /* Medium priority task, for tasks that are important but not urgent */
+  TASK_PRIORITY_MEDIUM = 2;
+  /* High priority task, for critical operations that need immediate attention */
+  TASK_PRIORITY_HIGH = 3;
+}
+
+/* Represents a task in the Kodus system. */
+message Task {
+  /* Metadata about the task, including progress, error messages, and priority */
+  message TaskMetadata {
+    /* Progress percentage (0-100), optional */
+    optional int32 progress = 1;
+    /* Error message if the task failed, optional */
+    optional string error = 2;
+    /* Priority of the task, optional */
+    optional TaskPriority priority = 3;
+  }
+
+  /* Unique identifier for the task */
+  string id = 1;
+  /* Current status of the task */
+  TaskStatus status = 2;
+  /* Current state of the task */
+  string state = 3;
+  /* Timestamp when the task was created */
+  google.protobuf.Timestamp created_at = 4;
+  /* Timestamp when the task was last updated */
+  google.protobuf.Timestamp updated_at = 5;
+  /* Metadata about the task */
+  TaskMetadata metadata = 6;
+}

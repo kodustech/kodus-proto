@@ -6,77 +6,99 @@ import "kodus/ast/v2/enriched.proto";
 import "kodus/ast/v2/graph.proto";
 import "kodus/ast/v2/repo.proto";
 
-// The ASTAnalyzerService provides methods for analyzing code repositories
+/* The ASTAnalyzerService provides methods for analyzing code repositories */
 service ASTAnalyzerService {
-  // Initializes a repository pair for analysis
+  /* Initializes a repository pair for analysis */
   rpc InitializeRepository(InitializeRepositoryRequest) returns (InitializeRepositoryResponse);
-  // Deletes a repository pair from analysis
+  /* Deletes a repository pair from analysis */
   rpc DeleteRepository(DeleteRepositoryRequest) returns (DeleteRepositoryResponse);
 
-  // Retrieves graphs for an initialized repository pair
+  /* Retrieves graphs for an initialized repository pair */
   rpc GetGraphs(GetGraphsRequest) returns (stream GetGraphsResponse);
-  // Retrieves relevant file content based on a diff
+  /* Retrieves relevant file content based on a diff */
   rpc GetContentFromDiff(GetContentFromDiffRequest) returns (stream GetContentFromDiffResponse);
 }
 
-// Request for initializing a repository pair
+/* Request for initializing a repository pair */
 message InitializeRepositoryRequest {
-  RepositoryData base_repo = 1; // The base repository to initialize
-  RepositoryData head_repo = 2; // The head repository to initialize
-}
-
-// Response for initializing a repository pair
-message InitializeRepositoryResponse {}
-
-// Request for deleting a repository pair
-message DeleteRepositoryRequest {
-  RepositoryData base_repo = 1; // The base repository to delete
-  RepositoryData head_repo = 2; // The head repository to delete
-}
-
-// Response for deleting a repository pair
-message DeleteRepositoryResponse {}
-
-// Request for getting graphs for a repository pair
-message GetGraphsRequest {
+  /* The base repository to initialize */
   RepositoryData base_repo = 1;
+  /* The head repository to initialize */
   RepositoryData head_repo = 2;
 }
 
-// Response for getting graphs for a repository pair
-message GetGraphsResponse {
-  bytes data = 1; // Serialized graph data
-  bool is_last = 2; // Indicates if this is the last chunk of data
+/* Response for initializing a repository pair */
+message InitializeRepositoryResponse {}
+
+/* Request for deleting a repository pair */
+message DeleteRepositoryRequest {
+  /* The base repository to delete */
+  RepositoryData base_repo = 1;
+  /* The head repository to delete */
+  RepositoryData head_repo = 2;
 }
 
-// Deserialized response data for GetGraphs
+/* Response for deleting a repository pair */
+message DeleteRepositoryResponse {}
+
+/* Request for getting graphs for a repository pair */
+message GetGraphsRequest {
+  /* The base repository to get graphs for */
+  RepositoryData base_repo = 1;
+  /* The head repository to get graphs for */
+  RepositoryData head_repo = 2;
+}
+
+/* Response for getting graphs for a repository pair */
+message GetGraphsResponse {
+  /* Serialized graph data */
+  bytes data = 1;
+  /* Indicates if this is the last chunk of data */
+  bool is_last = 2;
+}
+
+/* Deserialized response data for GetGraphs */
 message GetGraphsResponseData {
+  /* Graph */
   message Graph {
+    /* Serialized CodeGraph */
     CodeGraph graph = 1;
+    /* Path to the repository */
     string dir = 2;
   }
 
-  Graph base_graph = 1; // Graph for the base repository
-  Graph head_graph = 2; // Graph for the head repository
-  EnrichedGraph enrich_head_graph = 3; // Enriched graph for the head repository
+  /* Graph for the base repository */
+  Graph base_graph = 1;
+  /* Graph for the head repository */
+  Graph head_graph = 2;
+  /* Enriched graph for the head repository */
+  EnrichedGraph enrich_head_graph = 3;
 }
 
-// Request for getting relevant file content based on a diff
+/* Request for getting relevant file content based on a diff */
 message GetContentFromDiffRequest {
-  RepositoryData head_repo = 1; // The head repository to compare against
-  RepositoryData base_repo = 2; // The base repository to compare against
-  string diff = 3; // Diff in unified diff format
-  string file_path = 4; // Relative path to the file in the head repository
+  /* The head repository to compare against */
+  RepositoryData head_repo = 1;
+  /* The base repository to compare against */
+  RepositoryData base_repo = 2;
+  /* Diff in unified diff format */
+  string diff = 3;
+  /* Relative path to the file in the head repository */
+  string file_path = 4;
 }
 
-// Response for getting relevant file content based on a diff
+/* Response for getting relevant file content based on a diff */
 message GetContentFromDiffResponse {
-  bytes data = 1; // Serialized diff data
-  bool is_last = 2; // Indicates if this is the last chunk of data
+  /* Serialized diff data */
+  bytes data = 1;
+  /* Indicates if this is the last chunk of data */
+  bool is_last = 2;
 }
 
-// Generic streamed response for large data transfers
+/* Generic streamed response for large data transfers */
 message StreamedResponse {
-  bytes data = 1; // Serialized data for the response
-  bool is_last = 2; // Indicates if this is the last chunk of data
+  /* Serialized data for the response */
+  bytes data = 1;
+  /* Indicates if this is the last chunk of data */
+  bool is_last = 2;
 }

@@ -41,33 +41,37 @@
         "kodus/**/*"
     ],
     "exports": {
-        "./serialization/ast": {
-            "import": "./dist/serialization/ast/index.js",
-            "require": "./dist/serialization/ast/index.js",
-            "types": "./dist/serialization/ast/index.d.ts"
-        },
-        "./v1": {
-            "import": "./dist/gen/NestJs/kodus/ast/v1/index.js",
-            "require": "./dist/gen/NestJs/kodus/ast/v1/index.js",
-            "types": "./dist/gen/NestJs/kodus/ast/v1/index.d.ts"
-        },
-        "./v2": {
-            "import": "./dist/gen/NestJs/kodus/ast/v2/index.js",
-            "require": "./dist/gen/NestJs/kodus/ast/v2/index.js",
-            "types": "./dist/gen/NestJs/kodus/ast/v2/index.d.ts"
-        },
+        "./serialization": "./dist/serialization/index.js",
+        "./serialization/ast": "./dist/serialization/ast/index.js",
+        "./ast": "./dist/kodus/ast/index.js",
+        "./ast/v2": "./dist/gen/NestJs/kodus/ast/v2/index.js",
+        "./ast/v3": "./dist/gen/NestJs/kodus/ast/v3/index.js",
+        "./task": "./dist/kodus/task/index.js",
+        "./task/v1": "./dist/gen/NestJs/kodus/task/v1/index.js",
         "./package.json": "./package.json"
     },
     "typesVersions": {
         "*": {
+            "serialization": [
+                "./dist/serialization"
+            ],
             "serialization/ast": [
                 "./dist/serialization/ast"
             ],
-            "v1": [
-                "./dist/gen/NestJs/kodus/ast/v1"
+            "ast": [
+                "./dist/kodus/ast"
             ],
-            "v2": [
+            "ast/v2": [
                 "./dist/gen/NestJs/kodus/ast/v2"
+            ],
+            "ast/v3": [
+                "./dist/gen/NestJs/kodus/ast/v3"
+            ],
+            "task": [
+                "./dist/kodus/task"
+            ],
+            "task/v1": [
+                "./dist/gen/NestJs/kodus/task/v1"
             ]
         }
     },

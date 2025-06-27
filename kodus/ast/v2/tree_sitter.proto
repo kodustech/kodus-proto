@@ -2,14 +2,22 @@ syntax = "proto3";
 
 package kodus.ast.v2;
 
+/* Represents a point in the source code */
 message Point {
+  /* Line number in the source code */
   int32 row = 1;
+  /* Column number in the source code */
   int32 column = 2;
 }
 
+/* Represents a range in the source code */
 message Range {
+  /* Start index of the range */
   int32 start_index = 1;
+  /* End index of the range */
   int32 end_index = 2;
+  /* Start position of the range */
   Point start_position = 3;
+  /* End position of the range */
   Point end_position = 4;
 }

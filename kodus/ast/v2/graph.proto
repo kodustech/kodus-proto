@@ -4,101 +4,167 @@ package kodus.ast.v2;
 
 import "kodus/ast/v2/tree_sitter.proto";
 
+/* Types of nodes in the analysis graph */
 enum NodeType {
+  /* Unspecified node type */
   NODE_TYPE_UNSPECIFIED = 0;
+  /* Represents a file */
   NODE_TYPE_FILE = 1;
+  /* Represents an import statement */
   NODE_TYPE_IMPORT = 2;
+  /* Represents a class */
   NODE_TYPE_CLASS = 3;
+  /* Represents an interface */
   NODE_TYPE_INTERFACE = 4;
+  /* Represents a type alias */
   NODE_TYPE_TYPE_ALIAS = 5;
+  /* Represents an enum */
   NODE_TYPE_ENUM = 6;
+  /* Represents a function */
   NODE_TYPE_FUNCTION = 7;
+  /* Represents a function call */
   NODE_TYPE_FUNCTION_CALL = 8;
 }
 
-// Represents a scope
+/* Represents a scope */
 message Scope {
+  /* Type of the scope */
   NodeType type = 1;
+  /* Name of the scope */
   string name = 2;
 }
 
-// Represents a function call
+/* Represents a function call */
 message Call {
+  /* Unique identifier for the call */
   int32 node_id = 1;
+  /* Function name being called */
   string function = 2;
+  /* File of the function call */
   string file = 3;
+  /* Optional caller information */
   optional string caller = 4;
 }
 
-// Represents file analysis information
+/* Represents file analysis information */
 message FileAnalysis {
+  /* File definitions */
   repeated string defines = 1;
+  /* Function calls in the file */
   repeated Call calls = 2;
+  /* Imports in the file */
   repeated string imports = 3;
+  /* Classes defined in the file */
   repeated string class_name = 4;
 
+  /* Represents usage information for the file */
   message UsedBy {
+    /* Files that use this file */
     repeated string files = 1;
+    /* Functions that use this file */
     repeated string functions = 2;
+    /* Types that use this file */
     repeated string types = 3;
   }
+
+  /* Optional usage information for the file */
   optional UsedBy used_by = 5;
 
+  /* Represents dependencies of the file */
   message Dependencies {
+    /* Direct dependencies of the file */
     repeated string direct = 1;
+    /* Transitive dependencies of the file */
     repeated string transitive = 2;
   }
+
+  /* Optional dependencies of the file */
   optional Dependencies dependencies = 6;
 
+  /* Nodes in the analysis */
   map<int32, AnalysisNode> nodes = 7;
 }
 
-// Represents detailed function analysis
+/* Represents detailed function analysis */
 message FunctionAnalysis {
+  /* Unique identifier for the function */
   int32 node_id = 1;
+  /* Position of the function in the source code */
   Range position = 2;
+  /* File where the function is defined */
   string file = 3;
+  /* Name of the function */
   string name = 4;
+  /* Parameters of the function */
   repeated string params = 5;
+  /* Number of lines in the function */
   int32 lines = 6;
+  /* Return type of the function */
   string return_type = 7;
+  /* Function calls made by this function */
   repeated Call calls = 8;
+  /* Optional class name if the function is a method */
   optional string class_name = 9;
+  /* Start position in the source code */
   int32 start_line = 10;
+  /* End position in the source code */
   int32 end_line = 11;
+  /* Hash of the function for quick lookup */
   string function_hash = 12;
+  /* Hash of the function signature for quick lookup */
   string signature_hash = 13;
+  /* Full text of the function, if available */
   optional string full_text = 14;
 }
 
-// Represents detailed type analysis
+/* Represents detailed type analysis */
 message TypeAnalysis {
+  /* Unique identifier for the type */
   int32 node_id = 1;
+  /* Position of the type in the source code */
   Range position = 2;
+  /* File where the type is defined */
   string file = 3;
+  /* Type of the node, e.g., class, interface, type alias */
   NodeType type = 4;
+  /* Name of the type */
   string name = 5;
+  /* Fields of the type */
   map<string, string> fields = 6;
+  /* Implemented interfaces */
   repeated string implements = 7;
+  /* Classes or interfaces that implement this type */
   repeated string implemented_by = 8;
+  /* Classes or interfaces that extend this type */
   repeated string extends = 9;
+  /* Classes or interfaces that this type extends */
   repeated string extended_by = 10;
+  /* Scope of the type */
   repeated Scope scope = 11;
 }
 
-// Represents a node in the analysis tree
+/* Represents a node in the analysis tree */
 message AnalysisNode {
+  /* Unique identifier for the node */
   int32 id = 1;
+  /* Name of the node, e.g., function name, class name */
   string name = 2;
+  /* Full text of the node, if available */
   string text = 3;
+  /* Type of the node, e.g., function, class, file */
   NodeType type = 4;
+  /* Children of the node in the analysis tree */
   repeated AnalysisNode children = 5;
+  /* Position of the node in the source code */
   Range position = 6;
 }
 
-// Represents the complete code graph
+/* Represents the complete code graph */
 message CodeGraph {
+  /* Map of file analyses */
   map<string, FileAnalysis> files = 1;
+  /* Map of function analyses */
   map<string, FunctionAnalysis> functions = 2;
+  /* Map of type analyses */
   map<string, TypeAnalysis> types = 3;
 }

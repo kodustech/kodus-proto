@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package kodus.task.v1;
+
+import "kodus/task/v1/task.proto";
+
+/* TaskManagerService provides methods for managing tasks in the Kodus system. */
+service TaskManagerService {
+  /* Retrieves task information for a specific task ID */
+  rpc GetTaskInfo(GetTaskInfoRequest) returns (GetTaskInfoResponse);
+}
+
+/* Request for getting task information */
+message GetTaskInfoRequest {
+  /* The ID of the task to retrieve information for */
+  string task_id = 1;
+}
+
+/* Response for getting task information */
+message GetTaskInfoResponse {
+  /* The task information */
+  Task task = 1;
+}

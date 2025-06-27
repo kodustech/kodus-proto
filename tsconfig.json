@@ -25,6 +25,6 @@
   "watchOptions": {
       "watchFile": "useFsEventsOnParentDirectory"
   },
-  "include": ["gen/NestJs/**/*", "serialization/**/*"],
+  "include": ["gen/NestJs/**/*", "kodus/**/*", "serialization/**/*"],
   "exclude": ["node_modules", "dist"]
 }

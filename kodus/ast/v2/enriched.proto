@@ -5,42 +5,62 @@ package kodus.ast.v2;
 import "kodus/ast/v2/graph.proto";
 import "kodus/ast/v2/tree_sitter.proto";
 
-// Node types
-
-// Relationship types
+/* Relationship types */
 enum RelationshipType {
+  /* Unspecified relationship type */
   RELATIONSHIP_TYPE_UNSPECIFIED = 0;
+  /* Function calls */
   RELATIONSHIP_TYPE_CALLS = 1;
+  /* Function calls implementation */
   RELATIONSHIP_TYPE_CALLS_IMPLEMENTATION = 2;
+  /* Method has a relationship with a class or interface */
   RELATIONSHIP_TYPE_HAS_METHOD = 3;
+  /* Imports another file */
   RELATIONSHIP_TYPE_IMPORTS = 4;
+  /* Implements an interface */
   RELATIONSHIP_TYPE_IMPLEMENTS = 5;
+  /* Implemented by another class or interface */
   RELATIONSHIP_TYPE_IMPLEMENTED_BY = 6;
+  /* Class or interface extends another class or interface */
   RELATIONSHIP_TYPE_EXTENDS = 7;
+  /* Class or interface extended by another class or interface */
   RELATIONSHIP_TYPE_EXTENDED_BY = 8;
 }
 
-// Node in the enriched graph
+/* Node in the enriched graph */
 message EnrichedGraphNode {
+  /* Unique identifier for the node */
   int32 id = 1;
+  /* Name of the node, e.g., function name, class name */
   string name = 2;
+  /* Range of the node in the source code */
   Range position = 3;
+  /* Type of the node, e.g., function, class, file */
   NodeType type = 4;
+  /* Name of the file containing the node */
   string file = 5;
+  /* Path to the file containing the node, relative to the repository root */
   string file_path = 6;
 }
 
-// Edge/relationship in the enriched graph
+/* Edge/relationship in the enriched graph */
 message EnrichedGraphEdge {
+  /* Unique identifier for the edge */
   int32 from = 1;
+  /* Unique identifier for the target node */
   int32 to = 2;
+  /* Type of the relationship */
   RelationshipType type = 3;
+  /* Optional description of the relationship */
   string from_path = 4;
+  /* Optional description of the relationship */
   string to_path = 5;
 }
 
-// The enriched graph itself
+/* The enriched graph itself */
 message EnrichedGraph {
+  /* List of nodes in the graph */
   repeated EnrichedGraphNode nodes = 1;
+  /* List of relationships between nodes */
   repeated EnrichedGraphEdge relationships = 2;
 }

@@ -1,6 +1,5 @@
 import { SerializedCodeGraph, SerializedGetGraphsResponseData } from "./graph";
 import {
-    AnalysisNode,
     CodeGraph,
     GetGraphsResponseData,
 } from "../../gen/NestJs/kodus/ast/v2";

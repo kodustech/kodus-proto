@@ -2,39 +2,54 @@ syntax = "proto3";
 
 package kodus.ast.v2;
 
+/* Platform types for repositories */
 enum ProtoPlatformType {
+  /* Unspecified platform type */
   PROTO_PLATFORM_TYPE_UNSPECIFIED = 0;
+  /* GitHub */
   PROTO_PLATFORM_TYPE_GITHUB = 1;
+  /* GitLab */
   PROTO_PLATFORM_TYPE_GITLAB = 2;
-  PROTO_PLATFORM_TYPE_JIRA = 3;
-  PROTO_PLATFORM_TYPE_SLACK = 4;
-  PROTO_PLATFORM_TYPE_NOTION = 5;
-  PROTO_PLATFORM_TYPE_MSTEAMS = 6;
-  PROTO_PLATFORM_TYPE_DISCORD = 7;
-  PROTO_PLATFORM_TYPE_AZURE_BOARDS = 8;
-  PROTO_PLATFORM_TYPE_AZURE_REPOS = 9;
-  PROTO_PLATFORM_TYPE_KODUS_WEB = 10;
-  PROTO_PLATFORM_TYPE_BITBUCKET = 11;
+  /* Azure Repos */
+  PROTO_PLATFORM_TYPE_AZURE_REPOS = 3;
+  /* Bitbucket */
+  PROTO_PLATFORM_TYPE_BITBUCKET = 4;
 }
 
+/* Type of authentication used for repositories */
 enum ProtoAuthMode {
+  /* Unspecified authentication mode */
   PROTO_AUTH_MODE_UNSPECIFIED = 0;
+  /* OAuth authentication */
   PROTO_AUTH_MODE_OAUTH = 1;
+  /* Token-based authentication */
   PROTO_AUTH_MODE_TOKEN = 2;
 }
 
+/* Authentication information for repositories */
 message Auth {
+  /* Type of authentication */
   optional ProtoAuthMode type = 1;
+  /* OAuth token for authentication */
   optional string token = 2;
+  /* Org for authentication */
   optional string org = 3;
 }
 
+/* Repository data structure */
 message RepositoryData {
+  /* URL of the repository */
   string url = 1;
+  /* Platform type of the repository */
   ProtoPlatformType provider = 2;
+  /* Branch of the repository */
   optional string branch = 3;
+  /* Optional authentication information */
   optional Auth auth = 4;
+  /* Unique identifier for the organization */
   string organization_id = 5;
+  /* Unique identifier for the repository */
   string repository_id = 6;
+  /* Name of the repository */
   string repository_name = 7;
 }

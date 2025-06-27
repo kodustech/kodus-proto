@@ -1,4 +1,3 @@
-import { Range } from "tree-sitter";
 import {
     AnalysisNode,
     EnrichedGraph,

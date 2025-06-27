@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package kodus.ast.v3;
+
+/* Affected functions */
+message FunctionsAffect {
+  /* Name of the affected function */
+  string function_name = 1;
+  /* Path to the file containing the function */
+  string file_path = 2;
+  /* Body of the affected function */
+  string function_body = 3;
+}
+
+/* Represents a function that is similar to another function */
+message FunctionSimilar {
+  /* Name of the similar function */
+  string function_name = 1;
+  /* Indicates if the function is similar */
+  bool is_similar = 2;
+  /* Explanation of the similarity */
+  string explanation = 3;
+}
+
+/* Result of the impact analysis for functions */
+message FunctionsAffectResult {
+  /* Name of the old function */
+  string old_function = 1;
+  /* Name of the new function */
+  string new_function = 2;
+  /* List of affected functions */
+  repeated FunctionsAffect functions_affect = 3;
+}
+
+/* Represents the similarity between functions */
+message FunctionSimilarity {
+  /* Name of the function being compared */
+  string function_name = 1;
+  /* List of similar functions */
+  repeated FunctionSimilar similar_functions = 2;
+}
