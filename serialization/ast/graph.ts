@@ -13,7 +13,7 @@ export type SerializedCodeGraph = {
 };
 
 export type SerializedFileAnalysis = Omit<FileAnalysis, "nodes"> & {
-    nodes: Record<number, AnalysisNode>;
+    nodes: Record<string, AnalysisNode>;
 };
 
 export type SerializedGetGraphsResponseData = {

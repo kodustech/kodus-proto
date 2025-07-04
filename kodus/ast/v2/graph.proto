@@ -37,7 +37,7 @@ message Scope {
 /* Represents a function call */
 message Call {
   /* Unique identifier for the call */
-  int32 node_id = 1;
+  string node_id = 1;
   /* Function name being called */
   string function = 2;
   /* File of the function call */
@@ -82,13 +82,13 @@ message FileAnalysis {
   optional Dependencies dependencies = 6;
 
   /* Nodes in the analysis */
-  map<int32, AnalysisNode> nodes = 7;
+  map<string, AnalysisNode> nodes = 7;
 }
 
 /* Represents detailed function analysis */
 message FunctionAnalysis {
   /* Unique identifier for the function */
-  int32 node_id = 1;
+  string node_id = 1;
   /* Position of the function in the source code */
   Range position = 2;
   /* File where the function is defined */
@@ -120,7 +120,7 @@ message FunctionAnalysis {
 /* Represents detailed type analysis */
 message TypeAnalysis {
   /* Unique identifier for the type */
-  int32 node_id = 1;
+  string node_id = 1;
   /* Position of the type in the source code */
   Range position = 2;
   /* File where the type is defined */
@@ -146,7 +146,7 @@ message TypeAnalysis {
 /* Represents a node in the analysis tree */
 message AnalysisNode {
   /* Unique identifier for the node */
-  int32 id = 1;
+  string id = 1;
   /* Name of the node, e.g., function name, class name */
   string name = 2;
   /* Full text of the node, if available */

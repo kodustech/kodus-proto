@@ -30,7 +30,7 @@ enum RelationshipType {
 /* Node in the enriched graph */
 message EnrichedGraphNode {
   /* Unique identifier for the node */
-  int32 id = 1;
+  string id = 1;
   /* Name of the node, e.g., function name, class name */
   string name = 2;
   /* Range of the node in the source code */
@@ -41,14 +41,16 @@ message EnrichedGraphNode {
   string file = 5;
   /* Path to the file containing the node, relative to the repository root */
   string file_path = 6;
+  /* Name of the owning class or interface, if the node is a method */
+  optional string owner = 7;
 }
 
 /* Edge/relationship in the enriched graph */
 message EnrichedGraphEdge {
   /* Unique identifier for the edge */
-  int32 from = 1;
+  string from = 1;
   /* Unique identifier for the target node */
-  int32 to = 2;
+  string to = 2;
   /* Type of the relationship */
   RelationshipType type = 3;
   /* Optional description of the relationship */

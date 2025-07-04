@@ -11,12 +11,7 @@ export class ASTDeserializer {
                 key,
                 {
                     ...value,
-                    nodes: new Map(
-                        Object.entries(value.nodes).map(([nodeId, node]) => [
-                            parseInt(nodeId, 10),
-                            node,
-                        ])
-                    ),
+                    nodes: new Map(Object.entries(value.nodes)),
                 },
             ])
         );
