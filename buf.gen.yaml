@@ -8,6 +8,7 @@ plugins:
           - nestJs=true
           - exportCommonSymbols=false
           - useMapType=true
+          - addGrpcMetadata=true
 
 inputs:
     - directory: .
