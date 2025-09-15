@@ -34,6 +34,8 @@ message Auth {
   optional string token = 2;
   /* Org for authentication */
   optional string org = 3;
+  /** Username for authentication */
+  optional string username = 4;
 }
 
 /* Repository data structure */
